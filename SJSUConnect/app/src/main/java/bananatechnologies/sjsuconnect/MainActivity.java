@@ -1,5 +1,6 @@
 package bananatechnologies.sjsuconnect;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,14 +29,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG,"Reporting from login button pressed");
                 Log.i(TAG,"Email="+email.getText()+"Password="+password.getText());
 
-                if(email.getText().equals("admin")&&password.getText().equals("admin")){
+                startMainScreen();
+                /*if(email.getText().equals("admin")&&password.getText().equals("admin")){
                     Log.i(TAG,"Successful login");
                 }
                 else{
                     Log.i(TAG,"Login failed");
-                }
+                }*/
             }
         });
+    }
+
+    public void startMainScreen(){
+        Intent main=new Intent(this,MainScreen.class);
+        startActivity(main);
     }
 
 }
