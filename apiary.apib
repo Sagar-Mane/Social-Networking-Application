@@ -6,10 +6,10 @@ HOST: http://sjsuconnect.apiblueprint.org/
 APIs for SJSU Connect Node Express Server
 
 ## Register [/register]
-
-### Register New User [POST]
 This API will be used to register new user. User can register either using email address or phone number.
 Sensitive data such as passwords will be encrypted using bcrypt in NodeJS.
+
+### Register New User [POST]
 
 + Request (application/json)
 
@@ -31,9 +31,9 @@ Sensitive data such as passwords will be encrypted using bcrypt in NodeJS.
         ]
         
 ## Login [/login]
+This API will be used to login the user into the application. If username and passwords match then user will be logged into the system. 
 
 ### Login Existing User [POST]
-This API will be used to login the user into the application. If username and passwords match then user will be logged into the system. 
 
 + Request (application/json)
 
@@ -52,11 +52,11 @@ This API will be used to login the user into the application. If username and pa
         ]
         
 ## ValidateUser [/validateUser]
-
-### Validate Newly Registered User [POST]
 When user register's he will get an 4 digit verification code in his email addresss.
 He will have to enter the verification code in order to complete the registration.
 Once Verification is done he will be able to login to the application.
+
+### Validate Newly Registered User [POST]
 
 + Request (application/json)
 
@@ -73,10 +73,11 @@ Once Verification is done he will be able to login to the application.
         ]
         
 ## Get Posts [/getPosts]
-
-### Get Posts Feed [GET]
 When user logs in he will be presented with recent post feed from his friends and people he is following.
 Posts will be displayed according to the timestamp when they were posted.A
+
+### Get Posts Feed [GET]
+
 + Request (application/json)
 
         {
@@ -100,8 +101,7 @@ Posts will be displayed according to the timestamp when they were posted.A
                              {
                                 "email":"xyz@example.com",
                                 "content":"Great, will try doing that",
-                                "date":"12-05-2017",
-                                "time":"10:23AM",
+                                "date":"12-05-2017",                                "time":"10:23AM",
                                         
                              }
                         
@@ -125,5 +125,34 @@ Posts will be displayed according to the timestamp when they were posted.A
                         }
                     ]
                 }
+            }
+        ]
+
+## Update Profile [/updateProfile]      
+Every registered use has a profile. User can update his profile at any time by going in the profile view. 
+
+### Update User Profile [POST]
+
+
++ Request (application/json)
+
+        {
+            "nick_name"       : "Maddy",
+            "email"           : "abc@gmail.com",
+            "current_location": "San Jose",
+            "home_town"       : "Nagput",
+            "profession"      : "Student",
+            "profile_pic"     : "link to s3",
+            "birth_date"      : "09-02-1995"
+            "bio"             : "Dream Discover Achieve",
+            "interests"       : "Sports",
+            
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status":"Updation Successful"
             }
         ]
