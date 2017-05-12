@@ -1,13 +1,13 @@
 FORMAT: 1A
 HOST: http://sjsuconnect.apiblueprint.org/register
 
-# Register New User API
+# SJSU Connect REST APIs
 
 This API will register new user into the database and send a 4 digit verification code to registered email.
 
 ## Register [/register]
 
-### Register User [POST]
+### Register New User [POST]
 
 + Request (application/json)
 
@@ -25,5 +25,25 @@ This API will register new user into the database and send a 4 digit verificatio
         [
             {
                 "verification_code":4444
+            }
+        ]
+        
+## Login [/login]
+
+### Login Existing User [POST]
+
++ Request (application/json)
+
+        {
+            "email": "sagar.mane@sjsu.edu",
+            "password": "****"
+            
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status":"SignIn Successful"
             }
         ]
