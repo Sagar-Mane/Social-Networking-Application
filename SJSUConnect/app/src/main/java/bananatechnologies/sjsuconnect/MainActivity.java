@@ -1,6 +1,7 @@
 package bananatechnologies.sjsuconnect;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,12 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG,"Email="+email.getText()+"Password="+password.getText());
 
                 //startMainScreen();
-                registerUser();
+                login();
                 /*if(email.getText().equals("admin")&&password.getText().equals("admin")){
                     Log.i(TAG,"Successful login");
                 }
@@ -70,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                         // Response received Success 200
                         Log.i(TAG,"Response Received Successfully");
                         Log.i(TAG,"Response="+response);
-                        //login();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -87,30 +91,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(){
         Log.i(TAG,"Reporting from login function");
-
-        RequestQueue queue = Volley.newRequestQueue(this);
+        final String username=email.getText().toString();
+        final String pass=password.getText().toString();
         String url ="http://192.168.99.1:3000/login";
+        StringRequest login=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG,"Successful reponse returned");
+                Log.i(TAG,"Reponse=  "+response);
+            }
+        }, new Response.ErrorListener() {
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Response received Success 200
-                        Log.i(TAG,"Response Received Successfully");
-                        Log.i(TAG,"Response="+response);
-                    }
-                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Error Occured StatusCode 401
-                Log.i(TAG,"Error occured in the request");
-                Log.i(TAG,"Error=   "+error);
+                Log.i(TAG,"Error   -"+error);
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("username",username);
+                params.put("password", pass);
 
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+                return params;
+            }
+        };
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(this).addToRequestQueue(login);
 
     }
 
