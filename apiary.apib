@@ -1,0 +1,29 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Register New User API
+
+This API will register new user into the database and send a 4 digit verification code to registered email.
+
+## Register [/register]
+
+### Register User [POST]
+
++ Request (application/json)
+
+        {
+            "email": "sagar.mane@sjsu.edu",
+            "first_name": "Sagar",
+            "last_name": "Mane",
+            "phone_number": "669-225-9371",
+            "country_code": 1 
+            
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "verification_code":4444
+            }
+        ]
