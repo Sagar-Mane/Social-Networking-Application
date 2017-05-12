@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private static final String TAG = "logs";
+    private Button register_new_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         email=(EditText) findViewById(R.id.email);
         password=(EditText) findViewById(R.id.password);
+        register_new_user=(Button) findViewById(R.id.create_account);
+
         Log.i(TAG,"Reporting from onCreate view");
         login=(Button) findViewById(R.id.log_in);
         login.setOnClickListener(new View.OnClickListener() {
@@ -42,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
                 //startMainScreen();
                 login();
-                /*if(email.getText().equals("admin")&&password.getText().equals("admin")){
-                    Log.i(TAG,"Successful login");
-                }
-                else{
-                    Log.i(TAG,"Login failed");
-                }*/
+            }
+        });
+
+        register_new_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"Reporting from create account");
+                startRegisterActivity();
             }
         });
     }
@@ -117,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
         };
         bananatechnologies.sjsuconnect.RequestQueue.getInstance(this).addToRequestQueue(login);
 
+    }
+    public void startRegisterActivity(){
+        Intent main=new Intent(this,RegisterNewUser.class);
+        startActivity(main);
     }
 
 

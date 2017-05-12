@@ -84,7 +84,7 @@
             android:inputType="textEmailAddress"
             android:text="Enter Your Email Address"
             android:layout_below="@+id/phone_signup"
-            android:layout_alignStart="@+id/email_signup" />
+            android:layout_marginLeft="90dp" />
 
         <EditText
             android:id="@+id/phone_number_register"
@@ -104,7 +104,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="17dp"
             android:background="@color/colorPrimary"
-            android:text="Next" />
+            android:text="Next"
+            android:textColor="#ffffff"/>
 
     </RelativeLayout>
 
