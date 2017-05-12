@@ -62,13 +62,13 @@
 
         <Button
             android:id="@+id/create_account"
-            android:layout_width="250dp"
+            android:layout_width="260dp"
             android:layout_height="32dp"
             android:layout_alignStart="@+id/textView2"
             android:layout_below="@+id/textView2"
             android:layout_marginTop="23dp"
             android:background="#0daf18"
-            android:text="CREATE NEW FACEBOOK ACCOUNT"
+            android:text="CREATE NEW SJSU CONNECT ACCOUNT"
             android:textColor="#FFFFFF"
             android:textSize="13dp" />
 

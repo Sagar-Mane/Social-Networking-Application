@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainScreen" />
-        <activity android:name=".RegisterNewUser"></activity>
+        <activity android:name=".RegisterNewUser" />
+        <activity android:name=".verifyUser"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package bananatechnologies.sjsuconnect;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,16 @@ public class RegisterNewUser extends AppCompatActivity {
 
                 email_address_register.setVisibility(View.VISIBLE);
                 next_button_register.setVisibility(View.VISIBLE);
+
+                //Next step after pressing next button sign up with email
+                next_button_register.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i(TAG,"Reporting from next button pressed");
+                        startVerificationActivity();
+                    }
+                });
+
             }
         });
 
@@ -55,8 +66,21 @@ public class RegisterNewUser extends AppCompatActivity {
                 email_address_register.setVisibility(View.GONE);
                 phone_number_register.setVisibility(View.VISIBLE);
                 next_button_register.setVisibility(View.VISIBLE);
+
+                //Next step after pressing next button sign up with phone
+                next_button_register.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i(TAG,"Reporting from next button pressed");
+                        startVerificationActivity();
+                    }
+                });
             }
         });
     }
 
+    public void startVerificationActivity(){
+        Intent verification_activity=new Intent(this,verifyUser.class);
+        startActivity(verification_activity);
+    }
 }

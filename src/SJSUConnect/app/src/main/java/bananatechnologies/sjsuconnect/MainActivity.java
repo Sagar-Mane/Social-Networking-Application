@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG,"Reporting from login button pressed");
                 Log.i(TAG,"Email="+email.getText()+"Password="+password.getText());
 
-                //startMainScreen();
-                login();
+                startMainScreen();
+                //login();
             }
         });
 
