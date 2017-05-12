@@ -3,11 +3,13 @@ HOST: http://sjsuconnect.apiblueprint.org/register
 
 # SJSU Connect REST APIs
 
-This API will register new user into the database and send a 4 digit verification code to registered email.
+APIs for SJSU Connect Node Express Server
 
 ## Register [/register]
 
 ### Register New User [POST]
+This API will be used to register new user. User can register either using email address or phone number.
+Sensitive data such as passwords will be encrypted using bcrypt in NodeJS.
 
 + Request (application/json)
 
@@ -31,6 +33,7 @@ This API will register new user into the database and send a 4 digit verificatio
 ## Login [/login]
 
 ### Login Existing User [POST]
+This API will be used to login the user into the application. If username and passwords match then user will be logged into the system. 
 
 + Request (application/json)
 
@@ -45,5 +48,26 @@ This API will register new user into the database and send a 4 digit verificatio
         [
             {
                 "status":"SignIn Successful"
+            }
+        ]
+        
+## ValidateUser [/validateUser]
+
+### Validate Newly Registered User [POST]
+When user register's he will get an 4 digit verification code in his email addresss.
+He will have to enter the verification code in order to complete the registration.
+Once Verification is done he will be able to login to the application.
+
++ Request (application/json)
+
+        {
+            "verification_code": "****",
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status":"Validation Successful"
             }
         ]
