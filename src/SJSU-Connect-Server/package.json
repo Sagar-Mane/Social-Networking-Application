@@ -6,7 +6,9 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "ejs": "*",
     "express": "3.2.6",
-    "ejs": "*"
+    "mongodb": "^2.2.26"
   }
 }
