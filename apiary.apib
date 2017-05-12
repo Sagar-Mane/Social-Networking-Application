@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://sjsuconnect.apiblueprint.org/register
+HOST: http://sjsuconnect.apiblueprint.org/
 
 # SJSU Connect REST APIs
 
@@ -69,5 +69,61 @@ Once Verification is done he will be able to login to the application.
         [
             {
                 "status":"Validation Successful"
+            }
+        ]
+        
+## Get Posts [/getPosts]
+
+### Get Posts Feed [GET]
+When user logs in he will be presented with recent post feed from his friends and people he is following.
+Posts will be displayed according to the timestamp when they were posted.A
++ Request (application/json)
+
+        {
+            "email": "abc@example.com",
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "posts":
+                {
+                    [
+                        {
+                             "owner_email_id":"abc@example.com",
+                             "content":"Feeling amazing using Apiary. Give it a Try!!1",
+                             "date":"12-05-2017",
+                             "time":"8:00AM",
+                             "media":"link to image in s3",
+                             "comments":
+                             {
+                                "email":"xyz@example.com",
+                                "content":"Great, will try doing that",
+                                "date":"12-05-2017",
+                                "time":"10:23AM",
+                                        
+                             }
+                        
+                        }
+                    ],
+                    [
+                        {
+                            "owner_email_id":"vedant@gmail.com",
+                             "content":"Thinking of going to gym in summer",
+                             "date":"12-05-2017",
+                             "time":"9:00AM",
+                             "media":"link to image in s3",
+                             "comments":
+                             {
+                                "email":"sagar@gmail.com",
+                                "content":"Good luck doing that 😅",
+                                "date":"12-05-2017",
+                                "time":"10:25AM",
+                                        
+                             }
+                        }
+                    ]
+                }
             }
         ]
