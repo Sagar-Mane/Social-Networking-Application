@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , friends = require('./routes/friends')
   , http = require('http')
   , path = require('path');
 
@@ -34,6 +35,8 @@ app.post('/register',user.register);
 app.post('/forgotPassword',user.forgotPassword);
 app.post('/editProfile',user.editProfile);
 app.post('/validate', user.validate);
+app.post('/addNewFriend', friends.addNewFriend);
+app.get('/getFriendRequests', friends.getFriendRequests);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
