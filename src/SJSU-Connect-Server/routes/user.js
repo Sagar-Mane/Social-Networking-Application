@@ -42,7 +42,7 @@ exports.register=function(req,res){
 
     mongo.connect(url, function() {
 
-        console.log('CONNECTED TO MONGO IN handle_get_property_list_request');
+        console.log('CONNECTED TO MONGO IN register');
         var Users = mongo.collection('Users');
         var json_response= {};
 

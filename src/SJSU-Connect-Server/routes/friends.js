@@ -7,7 +7,7 @@ exports.addNewFriend=function(req,res){
 
     var email = req.param("email");
     var friend_email = req.param("friend_email");
-    var friend_name = req.param("friend_name");
+    var first_name = req.param("first_name");
 
     mongo.connect(url, function() {
 
@@ -17,7 +17,7 @@ exports.addNewFriend=function(req,res){
         var request = {
             email:	email,
             friend_email:	friend_email,
-            friend_name : friend_name
+            first_name : first_name
         };
         PendingRequests.insert(request, function (err, result) {
             if(err)
@@ -25,11 +25,14 @@ exports.addNewFriend=function(req,res){
                 throw err;
                 //db.close();
             }
-
             else if(result.insertedCount ==1)
             {
                 console.log("found user." + result[0])
                 response={"statusCode" : 200};
+                res.send(response);
+            }
+            else{
+                response={"statusCode" : 400};
                 res.send(response);
             }
         });
@@ -48,7 +51,7 @@ exports.getFriendRequests=function(req,res){
         var json_response= {};
 
 
-        PendingRequests.find({"email":email}).toArray(function(err, requests){
+        PendingRequests.find({"friend_email":email}).toArray(function(err, requests){
             if(err)
             {
                 throw err;
@@ -60,6 +63,52 @@ exports.getFriendRequests=function(req,res){
             {
                 response={"statusCode" : 200, "data":requests};
                 res.send(response);
+            }
+        });
+    });
+
+};
+
+
+exports.addByEmail=function(req,res){
+    console.log("Reporting from addByEmail ");
+
+    var email = req.param("email");
+    var friend_email = req.param("friend_email");
+    var first_name = req.param("first_name");
+
+
+    mongo.connect(url, function() {
+        var Users = mongo.collection('Users');
+        var PendingRequests = mongo.collection('PendingRequests');
+        var json_response= {};
+
+        var request = {
+            email:	email,
+            friend_email:	friend_email,
+            first_name : first_name
+        };
+        Users.findOne({
+            "email": friend_email, active_ind:true
+        }, function(err, user){
+            if(user != null){
+                PendingRequests.insert(request, function (err, result) {
+                    if (err) {
+                        throw err;
+                        //db.close();
+                    }
+
+                    else if (result.insertedCount == 1) {
+                        console.log("found user." + result[0])
+                        response = {"statusCode": 200};
+                        res.send(response);
+                    }
+                });
+            }
+            else {
+                console.log("user does not exist");
+                json_responses = {"statusCode" : 201, "message":"email not registered/user inactive"};
+                res.send(json_responses);
             }
         });
     });
