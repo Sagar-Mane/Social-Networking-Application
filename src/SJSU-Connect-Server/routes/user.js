@@ -29,15 +29,14 @@ exports.register=function(req,res){
             pass: 'P@ssword123'
         }
     });
-    var val = Math.floor(1000 + Math.random() * 9000);
-    console.log(val);
+    var verification_id = Math.floor(1000 + Math.random() * 9000);
 
     var mailOptions = {
         from: '277', // sender address
         to: email, // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world ?', // plain text body
-        html: '<b>Your Validation code: </b>'+ val // html body
+        subject: 'Facebook Simulator Verification Code ', // Subject line
+        text: '', // plain text body
+        html: '<b>Your Validation code: </b>'+ verification_id
     };
 
 
@@ -54,7 +53,8 @@ exports.register=function(req,res){
             phone_number: phone_number,
             email : email,
             password : crp,
-            verification_id :val
+            verification_id :verification_id,
+            active_ind: false
         };
         Users.findOne({
             "email": email
@@ -135,6 +135,36 @@ exports.editProfile=function(req,res){
             else
             {
                 json_responses = {"statusCode" : 200};
+                res.send(json_responses);
+            }
+        });
+    });
+};
+
+exports.validate=function(req,res){
+    console.log("Reporting from validate function");
+    var email = req.param("email");
+    var verification_id = parseInt(req.param("verification_id"));
+
+    mongo.connect(url, function(){
+        console.log('Connected too mongo at: ' + url );
+        var Users = mongo.collection('Users');
+        Users.update({"email" :email, "verification_id":verification_id},
+            {$set:{"active_ind":true}},
+            function(err, user){
+
+            var json_responses;
+            if(err){
+                json_responses = {"statusCode" : 500};
+                res.send(json_responses);
+            }
+            else if(user.result.nModified == 1)
+            {
+                json_responses = {"statusCode" : 200};
+                res.send(json_responses);
+            }
+            else{
+                json_responses = {"statusCode" : 401};
                 res.send(json_responses);
             }
         });
