@@ -9,6 +9,7 @@
     "bcrypt-nodejs": "0.0.3",
     "ejs": "*",
     "express": "3.2.6",
-    "mongodb": "^2.2.26"
+    "mongodb": "^2.2.26",
+    "nodemailer":"2.0"
   }
 }
