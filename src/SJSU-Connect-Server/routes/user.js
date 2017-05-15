@@ -1,6 +1,7 @@
 var mongo = require('./mongo');
 var ObjectId = require('mongodb').ObjectID;
-var url = "mongodb://localhost:27017/Facebook";
+//var url = "mongodb://localhost:27017/sjsu-connect";
+var url = "mongodb://user1:user1@ds143231.mlab.com:43231/sjsu-connect";
 var bcrypt = require('bcrypt-nodejs');
 var nodemailer = require('nodemailer');
 
@@ -185,22 +186,26 @@ exports.validate=function(req,res){
     mongo.connect(url, function(){
         console.log('Connected too mongo at: ' + url );
         var Users = mongo.collection('Users');
-        Users.update({"email" :email, "verification_id":verification_id},
-            {$set:{"active_ind":true}},
-            function(err, user){
-
-            var json_responses;
-            if(err){
-                json_responses = {"statusCode" : 500};
-                res.send(json_responses);
+        Users.findOne({
+            "email": email, "verification_id": verification_id
+        }, function(err, user) {
+            if (user != null) {
+                Users.update({"email": email},
+                    {$set: {"active_ind": true}},
+                    function (err, user) {
+                        var json_responses;
+                        if (user.result.nModified == 1) {
+                            json_responses = {"statusCode": 200};
+                            res.send(json_responses);
+                        }
+                        else {
+                            json_responses = {"statusCode": 500};
+                            res.send(json_responses);
+                        }
+                    });
             }
-            else if(user.result.nModified == 1)
-            {
-                json_responses = {"statusCode" : 200};
-                res.send(json_responses);
-            }
-            else{
-                json_responses = {"statusCode" : 401};
+            else {
+                json_responses = {"statusCode": 401, "message": "Invalid authentication code"};
                 res.send(json_responses);
             }
         });

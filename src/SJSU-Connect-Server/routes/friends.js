@@ -1,6 +1,7 @@
 var mongo = require('./mongo');
 var ObjectId = require('mongodb').ObjectID;
-var url = "mongodb://localhost:27017/Facebook";
+//var url = "mongodb://localhost:27017/sjsu-connect";
+var url = "mongodb://user1:user1@ds143231.mlab.com:43231/sjsu-connect";
 
 exports.addNewFriend=function(req,res){
     console.log("Reporting from addNewFriend ");
@@ -143,4 +144,28 @@ exports.browseFriends = function(req,res)
         });
     });
 
+};
+
+exports.rejectFriendRequests=function(req,res){
+    console.log("Reporting from rejectFriendRequests function");
+    var user_email = req.param("email");
+    var friend_email = req.param("friend_email");
+
+    mongo.connect(url, function(){
+        console.log('Connected too mongo at: ' + url );
+        var PendingRequests = mongo.collection('PendingRequests');
+        PendingRequests.remove({"friend_email" :user_email, "email": friend_email
+        }, function(err, user){
+            var json_responses;
+            if(err){
+                json_responses = {"statusCode" : 401};
+                res.send(json_responses);
+            }
+            else
+            {
+                json_responses = {"statusCode" : 200};
+                res.send(json_responses);
+            }
+        });
+    });
 };
