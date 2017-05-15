@@ -87,7 +87,12 @@ public class RegisterNewUser extends AppCompatActivity {
                 */
 
 
+
+                //First call register user API from here...so that email will be sent to user's id
+                //and then start verification activity
+
                 //After clicking next button start the verification screen activity
+
                 startVerificationActivity();
             }
         });
@@ -121,7 +126,11 @@ public class RegisterNewUser extends AppCompatActivity {
                 Log.i(TAG,"Checking inputs when u click sign up with email"+last_name.getText().toString());
                 Log.i(TAG,"Checking inputs when u click sign up with email"+phone_number_register.getText().toString());*/
 
+                //First call register user API from here...so that email will be sent to user's id
+                //and then start verification activity
+
                 //After clicking next button start the verification screen activity
+
                 startVerificationActivity();
 
             }
