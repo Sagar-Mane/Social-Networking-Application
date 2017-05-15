@@ -114,3 +114,33 @@ exports.addByEmail=function(req,res){
     });
 
 };
+
+exports.browseFriends = function(req,res)
+{
+    console.log("Reporting from browseFriends");
+
+    var email = req.param("email");
+
+    mongo.connect(url, function() {
+
+        var Friends = mongo.collection('Friends');
+        var json_response= {};
+
+
+        Friends.find({"email":email}).toArray(function(err, requests){
+            if(err)
+            {
+                throw err;
+                response={"statusCode" : 501};
+                res.send(response);
+            }
+
+            else
+            {
+                response={"statusCode" : 200, "data":requests};
+                res.send(response);
+            }
+        });
+    });
+
+};
