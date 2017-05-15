@@ -36,13 +36,13 @@
 
         <EditText
             android:id="@+id/first_name"
+            android:hint="First Name"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView4"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="22dp"
-            android:text="First Name" />
+            android:layout_marginTop="22dp"/>
 
         <EditText
             android:id="@+id/last_name"
@@ -52,7 +52,7 @@
             android:layout_alignBottom="@+id/first_name"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="40dp"
-            android:text="Last Name" />
+            android:hint="Last Name" />
 
         <TextView
             android:id="@+id/email_signup"
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:inputType="textEmailAddress"
-            android:text="Enter Your Email Address"
+            android:hint="Enter Your Email Address"
             android:layout_below="@+id/phone_signup"
             android:layout_marginLeft="90dp" />
 
@@ -94,7 +94,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
             android:inputType="phone"
-            android:text="+1 669 225 9371" />
+            android:hint="--- --- ----" />
 
         <Button
             android:id="@+id/register"

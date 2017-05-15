@@ -27,7 +27,7 @@
             android:layout_marginTop="163dp"
             android:inputType="numberPassword"
             android:maxLength="4"
-            android:text="****"
+            android:hint="****"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 

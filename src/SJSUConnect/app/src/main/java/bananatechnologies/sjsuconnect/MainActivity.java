@@ -1,5 +1,6 @@
 package bananatechnologies.sjsuconnect;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private Button login;
     private static final String TAG = "logs";
     private Button register_new_user;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +42,19 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(TAG,"Reporting from onCreate view");
         login=(Button) findViewById(R.id.log_in);
+        //Login button listener
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Reporting from login button pressed");
                 Log.i(TAG,"Email="+email.getText()+"Password="+password.getText());
 
-                startMainScreen();
+                //startMainScreen();
                 //login();
             }
         });
 
+        //register new user button listener
         register_new_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,10 +64,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to start main screen using intent.
+     */
     public void startMainScreen(){
         Intent main=new Intent(this,MainScreen.class);
         startActivity(main);
+        /**
+         * Toast to welcome back user.
+         */
+        Context context = getApplicationContext();
+        CharSequence text = "Welcome back to SJSU Connect!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
+
+    /**
+     * Register User API call
+     */
     public void registerUser(){
 
         // Get a RequestQueue
@@ -70,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
 
-        String url ="http://192.168.99.1:3000/ping";
+        String url ="http://192.168.99.1:3000/register";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -94,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Login user API call
+     */
     public void login(){
         Log.i(TAG,"Reporting from login function");
         final String username=email.getText().toString();
@@ -104,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.i(TAG,"Successful reponse returned");
                 Log.i(TAG,"Reponse=  "+response);
+                //Give user access to the main screen here
+                //Add toast to tell you are succesfully logged in.
             }
         }, new Response.ErrorListener() {
 
@@ -124,9 +151,14 @@ public class MainActivity extends AppCompatActivity {
         bananatechnologies.sjsuconnect.RequestQueue.getInstance(this).addToRequestQueue(login);
 
     }
+
+    /**
+     * Start register activity using intent.
+     */
     public void startRegisterActivity(){
-        Intent main=new Intent(this,RegisterNewUser.class);
-        startActivity(main);
+        Log.i(TAG,"Reporting from start register activity");
+        Intent register_activity=new Intent(this,RegisterNewUser.class);
+        startActivity(register_activity);
     }
 
 

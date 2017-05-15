@@ -18,11 +18,15 @@ public class RegisterNewUser extends AppCompatActivity {
     private EditText phone_number_register;
     private Button next_button_register;
 
+    private EditText first_name;
+    private EditText last_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_user);
 
+        //getting references to UI elements
         sign_up_with_email=(TextView) findViewById(R.id.email_signup);
         sign_up_with_phone=(TextView) findViewById(R.id.phone_signup);
         email_address_register=(EditText)findViewById(R.id.email_id_register);
@@ -34,51 +38,100 @@ public class RegisterNewUser extends AppCompatActivity {
         email_address_register.setVisibility(View.INVISIBLE);
         phone_number_register.setVisibility(View.INVISIBLE);
 
+
+        //sign up with email button click listener
         sign_up_with_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG,"Reporting from sign up with email");
-                sign_up_with_email.setVisibility(View.GONE);
-                sign_up_with_phone.setVisibility(View.GONE);
-                phone_number_register.setVisibility(View.GONE);
-
-                email_address_register.setVisibility(View.VISIBLE);
-                next_button_register.setVisibility(View.VISIBLE);
-
-                //Next step after pressing next button sign up with email
-                next_button_register.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.i(TAG,"Reporting from next button pressed");
-                        startVerificationActivity();
-                    }
-                });
-
+                sign_up_with_email();
             }
         });
 
+        //sign up with phone button click listener
         sign_up_with_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG,"Reporting from sign up with phone");
-                sign_up_with_email.setVisibility(View.GONE);
-                sign_up_with_phone.setVisibility(View.GONE);
-                email_address_register.setVisibility(View.GONE);
-                phone_number_register.setVisibility(View.VISIBLE);
-                next_button_register.setVisibility(View.VISIBLE);
-
-                //Next step after pressing next button sign up with phone
-                next_button_register.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.i(TAG,"Reporting from next button pressed");
-                        startVerificationActivity();
-                    }
-                });
+                sign_up_with_phone();
             }
         });
     }
 
+    /**
+     * sign up with email address
+     */
+    public void sign_up_with_email() {
+        Log.i(TAG, "Reporting from signup with email");
+        //Handling UI visibility
+        sign_up_with_email.setVisibility(View.GONE);
+        sign_up_with_phone.setVisibility(View.GONE);
+        phone_number_register.setVisibility(View.GONE);
+        email_address_register.setVisibility(View.VISIBLE);
+        next_button_register.setVisibility(View.VISIBLE);
+        //end handling UI visibility
+
+        //Next step after pressing next button sign up with email
+        next_button_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"Reporting from next button pressed");
+
+                // getting references to Input elements
+                first_name=(EditText) findViewById(R.id.first_name);
+                last_name=(EditText) findViewById(R.id.last_name);
+                email_address_register=(EditText) findViewById(R.id.email_id_register);
+                //Logs to check inputs from register screen
+
+                /*Log.i(TAG,"@@@@@@@@@@@@@@##########$$$$$$$$$$$$$$$$Checking inputs when u click sign up with email"+first_name.getText().toString());
+                Log.i(TAG,"Checking inputs when u click sign up with email"+last_name.getText().toString());
+                Log.i(TAG,"Checking inputs when u click sign up with email"+email_address_register.getText().toString());
+                */
+
+
+                //After clicking next button start the verification screen activity
+                startVerificationActivity();
+            }
+        });
+    }
+
+    /**
+     * sign up with phone
+     */
+    public void sign_up_with_phone(){
+        Log.i(TAG,"Reporting from sign up with phone");
+
+        //Handling UI visibility
+        sign_up_with_email.setVisibility(View.GONE);
+        sign_up_with_phone.setVisibility(View.GONE);
+        email_address_register.setVisibility(View.GONE);
+        phone_number_register.setVisibility(View.VISIBLE);
+        next_button_register.setVisibility(View.VISIBLE);
+        //end handling UI visibility
+
+        //Next step after pressing next button in signup with phone
+        next_button_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                first_name=(EditText) findViewById(R.id.first_name);
+                last_name=(EditText) findViewById(R.id.last_name);
+                phone_number_register=(EditText) findViewById(R.id.phone_number_register);
+
+                //Logs to check inputs from register screen
+
+                /*Log.i(TAG,"@@@@@@@@@@@@@@##########$$$$$$$$$$$$$$$$Checking inputs when u click sign up with email"+first_name.getText().toString());
+                Log.i(TAG,"Checking inputs when u click sign up with email"+last_name.getText().toString());
+                Log.i(TAG,"Checking inputs when u click sign up with email"+phone_number_register.getText().toString());*/
+
+                //After clicking next button start the verification screen activity
+                startVerificationActivity();
+
+            }
+        });
+    }
+
+
+    /**
+     * start verification activity using intent
+     */
     public void startVerificationActivity(){
         Intent verification_activity=new Intent(this,verifyUser.class);
         startActivity(verification_activity);
