@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , friends = require('./routes/friends')
+  , index= require('./routes/index')
   , http = require('http')
   , path = require('path');
 
@@ -29,6 +30,12 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+
+/**
+ * Ping Resources
+ */
+app.get('/get_ping',index.get_ping);
+app.post('/post_ping',index.post_ping);
 
 app.post('/login',user.login);
 app.post('/register',user.register);

@@ -4,6 +4,8 @@ var url = "mongodb://localhost:27017/Facebook";
 var bcrypt = require('bcrypt-nodejs');
 var nodemailer = require('nodemailer');
 
+
+
 exports.login=function(req,res){
     console.log("Reporting from login function");
 
@@ -68,9 +70,9 @@ exports.register=function(req,res){
     var mailOptions = {
         from: '277', // sender address
         to: email, // list of receivers
-        subject: 'Facebook Simulator Verification Code ', // Subject line
-        text: '', // plain text body
-        html: '<b>Your Validation code: </b>'+ verification_id
+        subject: 'SJSU Connect Verification ', // Subject line
+        text: 'Welcome aboard !! Please verify your account to start going social on SJSU', // plain text body
+        html: '<b>Verification Code: </b>'+ verification_id
     };
 
 
