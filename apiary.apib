@@ -156,3 +156,25 @@ Every registered use has a profile. User can update his profile at any time by g
                 "status":"Updation Successful"
             }
         ]
+    
+## Browse Friends [/friends]
+This API will be used to browse through your friends list.dding
+
+### See Your Friends [GET]
+
++ Request (application/json)
+
+        {
+            "email": "sagar.mane@sjsu.edu",
+            
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "first_name":"Sagar",
+                "last_name":"Mane",
+                "profile_pic":"",
+            }
+        ]
