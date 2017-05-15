@@ -55,7 +55,6 @@ exports.getFriendRequests=function(req,res){
         PendingRequests.find({"friend_email":email}).toArray(function(err, requests){
             if(err)
             {
-                throw err;
                 response={"statusCode" : 501};
                 res.send(response);
             }

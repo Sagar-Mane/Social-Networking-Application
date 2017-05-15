@@ -44,3 +44,31 @@ exports.sendMessage=function(req,res){
         });
     });
 };
+
+exports.getMessages=function(req,res){
+    console.log("Reporting from getMessages");
+
+    var email = req.param("email");
+
+    mongo.connect(url, function() {
+
+        var Messages = mongo.collection('Messages');
+        var json_response= {};
+
+
+        Messages.find({"reciever_email_id":email}).toArray(function(err, requests){
+            if(err)
+            {
+                response={"statusCode" : 501};
+                res.send(response);
+            }
+
+            else
+            {
+                response={"statusCode" : 200, "data":requests};
+                res.send(response);
+            }
+        });
+    });
+
+};
