@@ -1,5 +1,6 @@
 package bananatechnologies.sjsuconnect;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterNewUser extends AppCompatActivity {
 
@@ -20,6 +30,8 @@ public class RegisterNewUser extends AppCompatActivity {
 
     private EditText first_name;
     private EditText last_name;
+
+    private Activity ref_this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,8 @@ public class RegisterNewUser extends AppCompatActivity {
         email_address_register.setVisibility(View.INVISIBLE);
         phone_number_register.setVisibility(View.INVISIBLE);
 
+        //getting activity instance
+        ref_this=this;
 
         //sign up with email button click listener
         sign_up_with_email.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +105,53 @@ public class RegisterNewUser extends AppCompatActivity {
                 //First call register user API from here...so that email will be sent to user's id
                 //and then start verification activity
 
+                // Get a RequestQueue
+                com.android.volley.RequestQueue queue = bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this.getApplicationContext()).
+                        getRequestQueue();
+
+                // Instantiate the RequestQueue.
+
+                String url ="http://192.168.99.1:3000/register";
+
+                // Request a string response from the provided URL.
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                // Response received Success 200
+                                Log.i(TAG,"Response Received Successfully");
+                                Log.i(TAG,"Response="+response);
+                                //After clicking next button start the verification screen activity
+
+                                startVerificationActivity();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Error Occured StatusCode 401
+                        Log.i(TAG,"Error occured in the request");
+                        Log.i(TAG,"Error=   "+error);
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String>  params = new HashMap<String, String>();
+
+                        params.put("first_name",first_name.getText().toString());
+                        params.put("last_name",last_name.getText().toString());
+                        params.put("country_code","1");
+                        params.put("phone_number",phone_number_register.getText().toString());
+                        params.put("email",email_address_register.getText().toString());
+                        params.put("password", "555");
+                        return params;
+                    }
+                };
+                // Add the request to the RequestQueue.
+                bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(stringRequest);
+
                 //After clicking next button start the verification screen activity
 
-                startVerificationActivity();
+
             }
         });
     }
@@ -129,9 +187,52 @@ public class RegisterNewUser extends AppCompatActivity {
                 //First call register user API from here...so that email will be sent to user's id
                 //and then start verification activity
 
-                //After clicking next button start the verification screen activity
 
-                startVerificationActivity();
+                // Get a RequestQueue
+                com.android.volley.RequestQueue queue = bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this.getApplicationContext()).
+                        getRequestQueue();
+
+                // Instantiate the RequestQueue.
+
+                String url ="http://192.168.99.1:3000/register";
+
+                // Request a string response from the provided URL.
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                // Response received Success 200
+                                Log.i(TAG,"Response Received Successfully");
+                                Log.i(TAG,"Response="+response);
+                                //After clicking next button start the verification screen activity
+
+                                startVerificationActivity();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Error Occured StatusCode 401
+                        Log.i(TAG,"Error occured in the request");
+                        Log.i(TAG,"Error=   "+error);
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String>  params = new HashMap<String, String>();
+
+                        params.put("first_name",first_name.getText().toString());
+                        params.put("last_name",last_name.getText().toString());
+                        params.put("country_code","1");
+                        params.put("phone_number",phone_number_register.getText().toString());
+                        params.put("email",email_address_register.getText().toString());
+                        params.put("password", "555");
+                        return params;
+                    }
+                };
+                // Add the request to the RequestQueue.
+                bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(stringRequest);
+
+
 
             }
         });
