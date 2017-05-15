@@ -200,3 +200,47 @@ This API will be used to update your status with or without the media(pic).
                 "status":"Status Updated"
             }
         ]
+        
+## Send Private Message [/send_message]
+This API will be used to send private messages to friends or anyone with the public profile.
+
+### Sending private message [POST]
+
++ Request (application/json)
+
+        {
+            "email": "sagar.mane@sjsu.edu",
+            "recipient": "vedant@gmail.com",
+            "subject":"How are you",
+            "message":"Hello",
+            
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status":"Sent"
+            }
+        ]
+
+## Receive Private Message [/receive_message]
+This API will be used to receive messages.
+
+### Receiving messages 
+
++ Request (application/json)
+
+        {
+            "sender":"sagar.mane@gmail.com",
+            "subject":"How are you",
+            "body":"Hey there, how are you doing!!"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status":"received"
+            }
+        ]
