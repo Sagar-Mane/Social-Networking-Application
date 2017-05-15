@@ -169,3 +169,61 @@ exports.rejectFriendRequests=function(req,res){
         });
     });
 };
+
+exports.approveFriendRequests=function(req,res){
+    console.log("Reporting from approveFriendRequests ");
+
+    var email = req.param("email");
+    var friend_email = req.param("friend_email");
+
+
+    mongo.connect(url, function() {
+        var PendingRequests = mongo.collection('PendingRequests');
+        var json_response= {};
+
+        PendingRequests.findOne({
+            "friend_email": email, email:friend_email
+        }, function(err, user){
+            var temp = user;
+            var request = {
+                email:	email,
+                friend_email:	friend_email,
+                first_name : temp.first_name,
+                friend_status : "add"
+            };
+            if(user != null){
+                PendingRequests.remove({"friend_email" :email, "email": friend_email
+                }, function(err, user){
+                    var json_responses;
+                    if(err){
+                        json_responses = {"statusCode" : 401};
+                        res.send(json_responses);
+                    }
+                    else
+                    {
+                        var Friends = mongo.collection('Friends');
+                        Friends.insert(request, function (err, result) {
+                            if (err) {
+                                throw err;
+                                //db.close();
+                            }
+
+                            else if (result.insertedCount == 1) {
+                                console.log("found user." + result[0])
+                                response = {"statusCode": 200};
+                                res.send(response);
+                            }
+                        });
+                    }
+                });
+
+            }
+            else {
+                console.log("user does not exist");
+                json_responses = {"statusCode" : 201, "message":"email not registered/user inactive"};
+                res.send(json_responses);
+            }
+        });
+    });
+
+};
