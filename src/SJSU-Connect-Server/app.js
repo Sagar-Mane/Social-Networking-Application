@@ -45,6 +45,7 @@ app.post('/validate', user.validate);
 app.post('/addNewFriend', friends.addNewFriend);
 app.get('/getFriendRequests', friends.getFriendRequests);
 app.post('/addByEmail', friends.addByEmail);
+app.post('/browseFriends', friends.browseFriends);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
