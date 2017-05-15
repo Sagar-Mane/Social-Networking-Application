@@ -5,8 +5,42 @@ var bcrypt = require('bcrypt-nodejs');
 var nodemailer = require('nodemailer');
 
 exports.login=function(req,res){
-	console.log("Reporting from login function");
-	
+    console.log("Reporting from login function");
+
+    var email = req.param("email");
+    var password = req.param("password");
+
+    mongo.connect(url, function() {
+
+        console.log('CONNECTED TO MONGO IN handle_get_property_list_request');
+        var Users = mongo.collection('Users');
+        var json_response= {};
+
+        Users.find({email: email}).toArray(function(err,result){
+            if(err)
+            {
+                throw err;
+                res.code = "401";
+                res.value = "Failed Login";
+                //db.close();
+                res.send({statusCode: "401"});
+            }
+
+            else
+            {
+                console.log("found user." + result[0]);
+
+                if(bcrypt.compareSync(password, result[0].password))
+                {
+                    //db.close();
+                    //req.session.username = msg.username;
+                    res.code = "401";
+                    res.value = "Succes Login";
+                    res.send({statusCode: "200"});
+                }
+            }
+        });
+    });
 };
 
 exports.register=function(req,res){
