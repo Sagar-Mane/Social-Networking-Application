@@ -182,7 +182,7 @@ This API will be used to browse through your friends list.
 ## Update Status [/update]
 This API will be used to update your status with or without the media(pic).
 
-### See Your Friends [POST]
+### Update Status [POST]
 
 + Request (application/json)
 
@@ -227,7 +227,7 @@ This API will be used to send private messages to friends or anyone with the pub
 ## Receive Private Message [/receive_message]
 This API will be used to receive messages.
 
-### Receiving messages 
+### Receiving messages  [GET]
 
 + Request (application/json)
 
@@ -248,7 +248,7 @@ This API will be used to receive messages.
 ## Approve Friend Request [/add_friend]
 This API will be used to approve friend requests.
 
-### Approving friend requests received. 
+### Approving friend requests received.  [POST]
 
 + Request (application/json)
 
@@ -262,5 +262,25 @@ This API will be used to approve friend requests.
         [
             {
                 "status":"Added to your friend list"
+            }
+        ]
+        
+## Reject Friend Request [/reject_friend]
+This API will be used to approve friend requests.
+
+### Deleting unwanted friend requests. [DELETE]
+
++ Request (application/json)
+
+        {
+            "email":"sagar.mane@gmail.com",
+            "friend_email":"vedant@gmail.com"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status":"Friend request deleted."
             }
         ]
