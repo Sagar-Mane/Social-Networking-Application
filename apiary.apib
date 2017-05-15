@@ -244,3 +244,23 @@ This API will be used to receive messages.
                 "status":"received"
             }
         ]
+
+## Approve Friend Request [/add_friend]
+This API will be used to approve friend requests.
+
+### Approving friend requests received. 
+
++ Request (application/json)
+
+        {
+            "email":"sagar.mane@gmail.com",
+            "friend_email":"vedant@gmail.com"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status":"Added to your friend list"
+            }
+        ]
