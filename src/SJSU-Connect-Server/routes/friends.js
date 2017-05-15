@@ -33,7 +33,7 @@ exports.addNewFriend=function(req,res){
                 res.send(response);
             }
             else{
-                response={"statusCode" : 400};
+                response={"statusCode" : 401};
                 res.send(response);
             }
         });
@@ -95,19 +95,17 @@ exports.addByEmail=function(req,res){
             if(user != null){
                 PendingRequests.insert(request, function (err, result) {
                     if (err) {
-                        throw err;
-                        //db.close();
+                        response = {"statusCode": 500};
+                        res.send(response);
                     }
 
                     else if (result.insertedCount == 1) {
-                        console.log("found user." + result[0])
                         response = {"statusCode": 200};
                         res.send(response);
                     }
                 });
             }
             else {
-                console.log("user does not exist");
                 json_responses = {"statusCode" : 201, "message":"email not registered/user inactive"};
                 res.send(json_responses);
             }
@@ -204,8 +202,8 @@ exports.approveFriendRequests=function(req,res){
                         var Friends = mongo.collection('Friends');
                         Friends.insert(request, function (err, result) {
                             if (err) {
-                                throw err;
-                                //db.close();
+                                json_responses = {"statusCode" : 500};
+                                res.send(json_responses);
                             }
 
                             else if (result.insertedCount == 1) {
@@ -219,8 +217,7 @@ exports.approveFriendRequests=function(req,res){
 
             }
             else {
-                console.log("user does not exist");
-                json_responses = {"statusCode" : 201, "message":"email not registered/user inactive"};
+                json_responses = {"statusCode" : 401,"message":"pending request not found"};
                 res.send(json_responses);
             }
         });
