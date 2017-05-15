@@ -32,13 +32,17 @@ exports.login=function(req,res){
             {
                 console.log("found user." + result[0]);
 
-                if(bcrypt.compareSync(password, result[0].password))
+                if(bcrypt.compareSync(password, result[0].password) && result[0].active_ind == true)
                 {
                     //db.close();
                     //req.session.username = msg.username;
                     res.code = "401";
                     res.value = "Succes Login";
                     res.send({statusCode: "200"});
+                }
+                else
+                {
+                    res.send({statusCode: "401", msg:"Account is not verified"});
                 }
             }
         });
