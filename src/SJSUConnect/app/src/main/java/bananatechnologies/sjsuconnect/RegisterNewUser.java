@@ -31,7 +31,7 @@ public class RegisterNewUser extends AppCompatActivity {
     private EditText first_name;
     private EditText last_name;
 
-    private Activity ref_this;
+    private Activity ref_this;      //for getting reference to this activity outside the context
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class RegisterNewUser extends AppCompatActivity {
      */
     public void sign_up_with_email() {
         Log.i(TAG, "Reporting from signup with email");
+
         //Handling UI visibility
         sign_up_with_email.setVisibility(View.GONE);
         sign_up_with_phone.setVisibility(View.GONE);
@@ -100,15 +101,12 @@ public class RegisterNewUser extends AppCompatActivity {
                 Log.i(TAG,"Checking inputs when u click sign up with email"+email_address_register.getText().toString());
                 */
 
-
-
                 //First call register user API from here...so that email will be sent to user's id
                 //and then start verification activity
 
                 // Get a RequestQueue
                 com.android.volley.RequestQueue queue = bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this.getApplicationContext()).
                         getRequestQueue();
-
                 // Instantiate the RequestQueue.
 
                 String url ="http://192.168.99.1:3000/register";
@@ -121,8 +119,8 @@ public class RegisterNewUser extends AppCompatActivity {
                                 // Response received Success 200
                                 Log.i(TAG,"Response Received Successfully");
                                 Log.i(TAG,"Response="+response);
-                                //After clicking next button start the verification screen activity
 
+                                //After receiving reponse from register API start verification activity
                                 startVerificationActivity();
                             }
                         }, new Response.ErrorListener() {
@@ -148,10 +146,6 @@ public class RegisterNewUser extends AppCompatActivity {
                 };
                 // Add the request to the RequestQueue.
                 bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(stringRequest);
-
-                //After clicking next button start the verification screen activity
-
-
             }
         });
     }
