@@ -27,7 +27,7 @@ public class RegisterNewUser extends AppCompatActivity {
     private EditText email_address_register;
     private EditText phone_number_register;
     private Button next_button_register;
-
+    private EditText password;
     private EditText first_name;
     private EditText last_name;
 
@@ -44,11 +44,13 @@ public class RegisterNewUser extends AppCompatActivity {
         email_address_register=(EditText)findViewById(R.id.email_id_register);
         phone_number_register=(EditText) findViewById(R.id.phone_number_register);
         next_button_register=(Button) findViewById(R.id.register);
+        password=(EditText) findViewById(R.id.password);
 
         //Initially hiding unnessary things
         next_button_register.setVisibility(View.INVISIBLE);
         email_address_register.setVisibility(View.INVISIBLE);
         phone_number_register.setVisibility(View.INVISIBLE);
+        password.setVisibility(View.INVISIBLE);
 
         //getting activity instance
         ref_this=this;
@@ -82,6 +84,7 @@ public class RegisterNewUser extends AppCompatActivity {
         phone_number_register.setVisibility(View.GONE);
         email_address_register.setVisibility(View.VISIBLE);
         next_button_register.setVisibility(View.VISIBLE);
+        password.setVisibility(View.VISIBLE);
         //end handling UI visibility
 
         //Next step after pressing next button sign up with email
@@ -94,6 +97,10 @@ public class RegisterNewUser extends AppCompatActivity {
                 first_name=(EditText) findViewById(R.id.first_name);
                 last_name=(EditText) findViewById(R.id.last_name);
                 email_address_register=(EditText) findViewById(R.id.email_id_register);
+                password=(EditText) findViewById(R.id.password);
+                Log.i(TAG,"Checking password input"+password.getText().toString());
+
+                UserIdSingleton.getInstance().setUserId(email_address_register.getText().toString());
                 //Logs to check inputs from register screen
 
                 /*Log.i(TAG,"@@@@@@@@@@@@@@##########$$$$$$$$$$$$$$$$Checking inputs when u click sign up with email"+first_name.getText().toString());
@@ -140,7 +147,7 @@ public class RegisterNewUser extends AppCompatActivity {
                         params.put("country_code","1");
                         params.put("phone_number",phone_number_register.getText().toString());
                         params.put("email",email_address_register.getText().toString());
-                        params.put("password", "555");
+                        params.put("password", password.getText().toString());
                         return params;
                     }
                 };
@@ -171,7 +178,7 @@ public class RegisterNewUser extends AppCompatActivity {
                 first_name=(EditText) findViewById(R.id.first_name);
                 last_name=(EditText) findViewById(R.id.last_name);
                 phone_number_register=(EditText) findViewById(R.id.phone_number_register);
-
+                password=(EditText) findViewById(R.id.password);
                 //Logs to check inputs from register screen
 
                 /*Log.i(TAG,"@@@@@@@@@@@@@@##########$$$$$$$$$$$$$$$$Checking inputs when u click sign up with email"+first_name.getText().toString());
@@ -219,15 +226,12 @@ public class RegisterNewUser extends AppCompatActivity {
                         params.put("country_code","1");
                         params.put("phone_number",phone_number_register.getText().toString());
                         params.put("email",email_address_register.getText().toString());
-                        params.put("password", "555");
+                        params.put("password", password.getText().toString());
                         return params;
                     }
                 };
                 // Add the request to the RequestQueue.
                 bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(stringRequest);
-
-
-
             }
         });
     }

@@ -1,5 +1,6 @@
 package bananatechnologies.sjsuconnect;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -31,11 +32,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "logs";
     private Button register_new_user;
 
-
+    //ref to login activity
+    private Activity login_activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        login_activity=this;
 
         //getting references to UI elements
         email=(EditText) findViewById(R.id.email);
@@ -50,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i(TAG,"Reporting from login button pressed");
                 Log.i(TAG,"Email="+email.getText()+"Password="+password.getText());
-                UserIdSingleton.getInstance().setUserId(email.getText().toString());
-                //Start main screen after receiving response from login API
-                //startMainScreen();
+                //get username and password
+                email=(EditText) findViewById(R.id.email);
+                password=(EditText) findViewById(R.id.password);
+
+                login();
 
             }
         });
@@ -68,6 +74,62 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Method to call Login API
+     * Upon response 200 call startMainScreen Activity
+     */
+    public void login(){
+        //start user session
+        UserIdSingleton.getInstance().setUserId(email.getText().toString());
+        // Get a RequestQueue
+        com.android.volley.RequestQueue queue = bananatechnologies.sjsuconnect.RequestQueue.getInstance(login_activity.getApplicationContext()).
+                getRequestQueue();
+        // Instantiate the RequestQueue.
+
+        String url ="http://192.168.99.1:3000/login";
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Response received Success 200
+                        Log.i(TAG,"Response Received Successfully");
+                        Log.i(TAG,"Response="+response);
+
+                        //After receiving reponse from Login API start main screen
+                        startMainScreen();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Error Occured StatusCode 401
+                Log.i(TAG,"Error occured in the request");
+                Log.i(TAG,"Error=   "+error);
+                /**
+                 * Error toast.
+                 */
+                Context context = getApplicationContext();
+                CharSequence text = "Oops ! Something went wrong. Try Again";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                params.put("email",email.getText().toString());
+                params.put("password",password.getText().toString());
+                return params;
+            }
+        };
+        // Add the request to the RequestQueue.
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(login_activity).addToRequestQueue(stringRequest);
+    }
+
+    /**
      * Method to start main screen using intent.
      */
     public void startMainScreen(){
@@ -77,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
          * Toast to welcome back user.
          */
         Context context = getApplicationContext();
-        CharSequence text = "Welcome back to SJSU Connect!";
+        CharSequence text = "Welcome to SJSU Connect!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
