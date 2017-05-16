@@ -10,7 +10,8 @@ var express = require('express')
   , index= require('./routes/index')
   , http = require('http')
   , path = require('path')
-  , message = require('./routes/message');
+  , message = require('./routes/message')
+    , post = require('./routes/post');
 
 var app = express();
 
@@ -51,7 +52,9 @@ app.post('/rejectFriendRequests',friends.rejectFriendRequests);
 app.post('/approveFriendRequests',friends.approveFriendRequests);
 app.post('/sendMessage', message.sendMessage);
 app.get('/getMessages', message.getMessages);
-app.post('/follow',friends.follow)
+app.post('/follow',friends.follow);
+app.post('/updateStatus', post.updateStatus);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
