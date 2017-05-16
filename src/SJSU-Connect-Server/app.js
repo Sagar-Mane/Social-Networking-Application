@@ -51,7 +51,7 @@ app.post('/rejectFriendRequests',friends.rejectFriendRequests);
 app.post('/approveFriendRequests',friends.approveFriendRequests);
 app.post('/sendMessage', message.sendMessage);
 app.get('/getMessages', message.getMessages);
-
+app.post('/follow',friends.follow)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

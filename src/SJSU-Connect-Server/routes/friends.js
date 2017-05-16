@@ -223,3 +223,36 @@ exports.approveFriendRequests=function(req,res){
     });
 
 };
+
+
+exports.follow=function(req,res){
+    console.log("Reporting from follow ");
+
+    var email = req.param("email");
+    var friend_email = req.param("friend_email");
+    var first_name = req.param("first_name");
+
+    mongo.connect(url, function() {
+        var Friends = mongo.collection('Friends');
+        var json_response= {};
+        var request = {
+            email:	email,
+            friend_email:	friend_email,
+            first_name : first_name,
+            friend_status : "follow"
+        };
+        Friends.insert(request, function (err, result) {
+            if (err) {
+                json_responses = {"statusCode" : 500};
+                res.send(json_responses);
+            }
+
+            else if (result.insertedCount == 1) {
+                console.log("found user." + result[0])
+                response = {"statusCode": 200};
+                res.send(response);
+            }
+        });
+    });
+
+};
