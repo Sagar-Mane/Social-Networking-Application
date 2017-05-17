@@ -16,9 +16,9 @@ exports.addNewFriend=function(req,res){
         var json_response= {};
 
         var request = {
-            email:	email,
-            friend_email:	friend_email,
-            first_name : first_name
+            email_id:	email,
+            friend_email_id:	friend_email,
+            friend_name : first_name
         };
         PendingRequests.insert(request, function (err, result) {
             if(err)
@@ -52,7 +52,7 @@ exports.getFriendRequests=function(req,res){
         var json_response= {};
 
 
-        PendingRequests.find({"friend_email":email}).toArray(function(err, requests){
+        PendingRequests.find({"friend_email_id":email}).toArray(function(err, requests){
             if(err)
             {
                 response={"statusCode" : 501};
@@ -84,9 +84,9 @@ exports.addByEmail=function(req,res){
         var json_response= {};
 
         var request = {
-            email:	email,
-            friend_email:	friend_email,
-            first_name : first_name
+            email_id:	email,
+            friend_email_id:	friend_email,
+            friend_name : first_name
         };
         Users.findOne({
             "email": friend_email, active_ind:true
@@ -151,7 +151,7 @@ exports.rejectFriendRequests=function(req,res){
     mongo.connect(url, function(){
         console.log('Connected too mongo at: ' + url );
         var PendingRequests = mongo.collection('PendingRequests');
-        PendingRequests.remove({"friend_email" :user_email, "email": friend_email
+        PendingRequests.remove({"friend_email_id" :user_email, "email_id": friend_email
         }, function(err, user){
             var json_responses;
             if(err){
@@ -179,17 +179,17 @@ exports.approveFriendRequests=function(req,res){
         var json_response= {};
 
         PendingRequests.findOne({
-            "friend_email": email, email:friend_email
+            "friend_email_id": email, email_id:friend_email
         }, function(err, user){
             var temp = user;
             var request = {
-                email:	email,
-                friend_email:	friend_email,
-                first_name : temp.first_name,
+                email_id:	email,
+                friend_email_id:	friend_email,
+                friend_name : temp.friend_name,
                 friend_status : "add"
             };
             if(user != null){
-                PendingRequests.remove({"friend_email" :email, "email": friend_email
+                PendingRequests.remove({"friend_email_id" :email, "email_id": friend_email
                 }, function(err, user){
                     var json_responses;
                     if(err){
@@ -236,9 +236,9 @@ exports.follow=function(req,res){
         var Friends = mongo.collection('Friends');
         var json_response= {};
         var request = {
-            email:	email,
-            friend_email:	friend_email,
-            first_name : first_name,
+            email_id:	email,
+            friend_email_id:	friend_email,
+            friend_name : first_name,
             friend_status : "follow"
         };
         Friends.insert(request, function (err, result) {

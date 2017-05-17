@@ -54,6 +54,8 @@ app.post('/sendMessage', message.sendMessage);
 app.get('/getMessages', message.getMessages);
 app.post('/follow',friends.follow);
 app.post('/updateStatus', post.updateStatus);
+app.get('/getTimeline',post.getTimeline);
+app.get('/getPosts',post.getPosts);
 
 
 http.createServer(app).listen(app.get('port'), function(){
