@@ -1,0 +1,21 @@
+JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, temp, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                JSONObject temp = response;
+                //TODO: handle success
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                //TODO: handle failure
+             }
+        });
+
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                2,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(stringRequest);
+        com.example.jnirg.jay_lab1.RequestQueue.getInstance(this).addToRequestQueue(jsonRequest);
