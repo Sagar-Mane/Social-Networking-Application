@@ -1,0 +1,122 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SJSU Connect ",
+		"_postman_id": "5aec4936-faf7-512f-93b0-f88141bd9b6e",
+		"description": "SJSU Connect Node Express Server API testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"url": "http://private-99d477-sjsuconnect.apiary-mock.com/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"sagar.mane@sjsu.edu\",\r\n  \"password\": \"sagar123\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"url": "http://192.168.99.1:3000/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\":\"Sagar\",\n\t\"last_name\":\"Mane\",\n\t\"country_code\":\"\",\n\t\"phone_number\":\"\",\n\t\"email\":\"sagar.mane@sjsu.edu\",\n\t\"password\":\"sagar123\"\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Post Ping Resource",
+			"request": {
+				"url": "http://localhost:3000/post_ping",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hi\":\"Sagar\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Validate After Registration",
+			"request": {
+				"url": "http://localhost:3000/validate",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"sagar.mane@sjsu.edu\",\n\t\"verification_id\":\"1508\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Ping Resource GET",
+			"request": {
+				"url": "http://localhost:3000/get_ping",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Ping Resource Post",
+			"request": {
+				"url": "http://localhost:3000/post_ping",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hi\":\"Sagar\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
