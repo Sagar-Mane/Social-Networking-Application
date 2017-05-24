@@ -1,3 +1,12 @@
+JSONObject temp = new JSONObject();
+        params.put("first_name","Jay");
+        params.put("last_name","Nirgudkar");
+        params.put("country_code","1");
+        params.put("phone_number","6692046227");
+        params.put("email","jnirgudkar1@gmail.com");
+        params.put("password", "abcd1234");
+
+
 JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, temp, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
