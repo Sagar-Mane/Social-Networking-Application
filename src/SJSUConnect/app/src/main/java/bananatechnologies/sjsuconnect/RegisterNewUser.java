@@ -11,10 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +35,6 @@ public class RegisterNewUser extends AppCompatActivity {
     private EditText password;
     private EditText first_name;
     private EditText last_name;
-
     private Activity ref_this;      //for getting reference to this activity outside the context
 
     @Override
@@ -78,16 +82,19 @@ public class RegisterNewUser extends AppCompatActivity {
     public void sign_up_with_email() {
         Log.i(TAG, "Reporting from signup with email");
 
-        //Handling UI visibility
+        //Handling UI visibility ********************************************************************************************************
+
         sign_up_with_email.setVisibility(View.GONE);
         sign_up_with_phone.setVisibility(View.GONE);
         phone_number_register.setVisibility(View.GONE);
         email_address_register.setVisibility(View.VISIBLE);
         next_button_register.setVisibility(View.VISIBLE);
         password.setVisibility(View.VISIBLE);
-        //end handling UI visibility
+
+        //end handling UI visibility ****************************************************************************************************
 
         //Next step after pressing next button sign up with email
+
         next_button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +118,7 @@ public class RegisterNewUser extends AppCompatActivity {
                 //First call register user API from here...so that email will be sent to user's id
                 //and then start verification activity
 
-                // Get a RequestQueue
+                /*// Get a RequestQueue
                 com.android.volley.RequestQueue queue = bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this.getApplicationContext()).
                         getRequestQueue();
                 // Instantiate the RequestQueue.
@@ -152,7 +159,48 @@ public class RegisterNewUser extends AppCompatActivity {
                     }
                 };
                 // Add the request to the RequestQueue.
-                bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(stringRequest);
+                bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(stringRequest);*/
+
+                //testing json object request
+
+                JSONObject register_request_body = new JSONObject();
+                String url ="http://192.168.99.1:3000/register";
+                try
+                {
+                    register_request_body.put("first_name",first_name.getText().toString());
+                    register_request_body.put("last_name",last_name.getText().toString());
+                    register_request_body.put("country_code","1");
+                    register_request_body.put("phone_number",phone_number_register.getText().toString());
+                    register_request_body.put("email",email_address_register.getText().toString());
+                    register_request_body.put("password", password.getText().toString());
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, register_request_body, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        JSONObject temp = response;
+                        Log.i(TAG,"REsponse recieved ===="+response);
+                        //TODO: handle success
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        //TODO: handle failure
+                    }
+                });
+
+                jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
+                        5000,
+                        2,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                bananatechnologies.sjsuconnect.RequestQueue.getInstance(ref_this).addToRequestQueue(jsonRequest);
+
+
             }
         });
     }
