@@ -57,7 +57,7 @@ app.post('/updateStatus', post.updateStatus);
 app.get('/getTimeline',post.getTimeline);
 app.get('/getPosts',post.getPosts);
 app.get('/getProfile',user.getProfile);
-
+app.post('/resetPassword',user.resetPassword);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

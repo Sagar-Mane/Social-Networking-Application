@@ -144,9 +144,8 @@ exports.register=function(req,res){
 
 };
 
-exports.forgotPassword=function(req,res){
-	console.log("Reporting from forgot password function");
-};
+
+
 
 exports.editProfile=function(req,res){
 	console.log("Reporting from editProfile function");
@@ -301,3 +300,83 @@ function UpdatePhoto(username, password, callback)
         callback(err,data);
     })
 }
+
+exports.forgotPassword=function(req,res){
+    console.log("Reporting from forgot password function");
+    var email = req.param("email");
+
+    var json_response= {};
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'cmpe277spring@gmail.com',
+            pass: 'P@ssword123'
+        }
+    });
+    mongo.connect(url, function() {
+        var Users = mongo.collection('Users');
+
+        Users.findOne({
+                "email": email}, { verification_id: 1,_id: 0}
+            , function(err, user){
+                if(null !=user ){
+                    var mailOptions = {
+                        from: '277', // sender address
+                        to: email, // list of receivers
+                        subject: 'SJSU Connect Verification ', // Subject line
+                        text: 'Welcome aboard !! Please verify your account to start going social on SJSU', // plain text body
+                        html: '<b>Verification Code: </b>'+ user.verification_id
+                    };
+                    transporter.sendMail(mailOptions, function(error, info)  {
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log('Message %s sent: %s', info.messageId, info.response);
+                    });
+                    json_responses = {"statusCode" : 200};
+                    res.send(json_responses);
+                }
+                else{
+                    json_responses = {"statusCode" : 401, "message":"email not registered"};
+                    res.send(json_responses);
+                }
+            });
+    });
+};
+
+
+exports.resetPassword=function(req,res){
+    console.log("Reporting from validate function");
+    var email = req.param("email");
+    var verification_id = parseInt(req.param("verification_id"));
+    var newPassword = req.param("password");
+    var crp = bcrypt.hashSync(newPassword);
+
+    mongo.connect(url, function(){
+        console.log('Connected too mongo at: ' + url );
+        var Users = mongo.collection('Users');
+        Users.findOne({
+            "email": email, "verification_id": verification_id
+        }, function(err, user) {
+            if (user != null) {
+                Users.update({"email": email},
+                    {$set: {"password": crp}},
+                    function (err, user) {
+                        var json_responses;
+                        if (user.result.nModified == 1) {
+                            json_responses = {"statusCode": 200};
+                            res.send(json_responses);
+                        }
+                        else {
+                            json_responses = {"statusCode": 500};
+                            res.send(json_responses);
+                        }
+                    });
+            }
+            else {
+                json_responses = {"statusCode": 401, "message": "Invalid authentication code"};
+                res.send(json_responses);
+            }
+        });
+    });
+};
