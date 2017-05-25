@@ -124,8 +124,9 @@ exports.browseFriends = function(req,res)
         var Friends = mongo.collection('Friends');
         var json_response= {};
 
-
-        Friends.find({"email":email}).toArray(function(err, requests){
+        //{$or: [{expires: {$gte: new Date()}}, {expires: null}]}
+        //Friends.find({"email_id":email}, { friend_email_id: 1,_id: 0}).toArray(function(err, friends){
+        Friends.find({$and: [{"friend_status":"add"}, {$or: [{"email_id":email},{"friend_email_id":email}]}]}).toArray(function(err, friends){
             if(err)
             {
                 throw err;
@@ -135,8 +136,40 @@ exports.browseFriends = function(req,res)
 
             else
             {
-                response={"statusCode" : 200, "data":requests};
-                res.send(response);
+                var params =[];
+                console.log(friends.length);
+                friends.forEach(function callback(currentValue, index, array) {
+                    if(currentValue.friend_email_id == email) {
+                        params.push(currentValue.email_id);
+                        console.log(currentValue.email_id);
+                    }
+                    else if(currentValue.email_id == email) {
+                        params.push(currentValue.friend_email_id);
+                        console.log(currentValue.friend_email_id);
+                    }
+                });
+
+                if(params.length>0){
+                    var Users = mongo.collection('Users');
+                    Users.find({"email": {$in: params}}).toArray(function(err, friends){
+                        if(err)
+                        {
+                            response={"statusCode" : 501};
+                            res.send(response);
+                        }
+
+                        else
+                        {
+                            response={"statusCode" : 200, "friends":friends};
+                            res.send(response);
+                        }
+                    });
+                }
+                else {
+                    response={"statusCode" : 200, "friends":[]};
+                    res.send(response);
+                }
+
             }
         });
     });

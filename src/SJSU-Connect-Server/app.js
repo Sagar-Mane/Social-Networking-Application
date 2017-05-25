@@ -47,7 +47,7 @@ app.post('/validate', user.validate);
 app.post('/addNewFriend', friends.addNewFriend);
 app.get('/getFriendRequests', friends.getFriendRequests);
 app.post('/addByEmail', friends.addByEmail);
-app.post('/browseFriends', friends.browseFriends);
+app.get('/browseFriends', friends.browseFriends);
 app.post('/rejectFriendRequests',friends.rejectFriendRequests);
 app.post('/approveFriendRequests',friends.approveFriendRequests);
 app.post('/sendMessage', message.sendMessage);
