@@ -5,15 +5,16 @@ package bananatechnologies.sjsuconnect;
  */
 
 public class Friends {
-    private String first_name, post, picture;
+    private String first_name, post, picture,email;
 
     public Friends() {
     }
 
-    public Friends(String title, String genre, String year) {
+    public Friends(String title, String genre, String year,String email) {
         this.first_name = title;
         this.post = genre;
         this.picture = year;
+        this.email = email;
     }
 
     public String getFirst_name() {
@@ -39,4 +40,14 @@ public class Friends {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
 }

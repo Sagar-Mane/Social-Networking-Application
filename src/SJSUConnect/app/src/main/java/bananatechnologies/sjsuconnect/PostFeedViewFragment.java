@@ -2,6 +2,7 @@ package bananatechnologies.sjsuconnect;
 
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -117,27 +119,6 @@ public class PostFeedViewFragment extends Fragment{
 
     private void prepareMovieData() {
 
-        /*JSONObject posts_response_body = new JSONObject();
-        String url ="http://10.0.0.89:3000/getPosts";
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        mTxtDisplay.setText("Response: " + response.toString());
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-
-        bananatechnologies.sjsuconnect.RequestQueue.getInstance(getContext()).addToRequestQueue(jsObjRequest);
-*/
 
         Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
         postsList.add(posts);
