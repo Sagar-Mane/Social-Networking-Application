@@ -71,7 +71,27 @@ Once Verification is done he will be able to login to the application.
                 "status":"Validation Successful"
             }
         ]
-        
+
+## Forgot Password [/forgotPassword]
+This will be used to reset the password for specific profile.
+
+### Reset Password [POST]
+
++ Request (application/json)
+
+        {
+            "email": "sagar.mane@gmail.com",
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "verification_id":"****"
+            }
+        ]
+                
+
 ## Get Posts [/getPosts]
 When user logs in he will be presented with recent post feed from his friends and people he is following.
 Posts will be displayed according to the timestamp when they were posted.A
