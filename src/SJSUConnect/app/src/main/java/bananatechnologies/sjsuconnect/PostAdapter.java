@@ -52,12 +52,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         holder.year.setText(posts.getPicture());
 
 
-        holder.updatePost.setOnClickListener(new View.OnClickListener() {
+        /*holder.updatePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 
             }
-        });
+        });*/
     }
 
     public int getItemCount() {

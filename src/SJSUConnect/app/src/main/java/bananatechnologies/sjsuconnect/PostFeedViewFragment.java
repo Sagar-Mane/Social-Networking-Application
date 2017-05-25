@@ -16,8 +16,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Sagar Mane on 11-05-2017.
@@ -105,7 +119,43 @@ public class PostFeedViewFragment extends Fragment{
 
     private void prepareMovieData() {
 
-        Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
+        JSONObject posts_response_body = new JSONObject();
+        Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
+        String url ="http://10.0.0.89:3000/getPosts?email="+UserIdSingleton.getInstance().getUserId();
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.i("Posts Feeds", String.valueOf(response));
+                        try {
+                            JSONArray data = response.getJSONArray("data");
+                            for(int i=0;i<data.length(); i++){
+                                JSONObject jsonas = data.getJSONObject(i);
+                                Posts posts = new Posts(jsonas.getString("status"), "Action & Adventure", "05/25/2017");
+                                postsList.add(posts);
+                            }
+                        }
+                        catch (Exception e){
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(getContext()).addToRequestQueue(jsObjRequest);
+
+
+        /*Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
         postsList.add(posts);
 
         posts = new Posts("Inside Out", "Animation, Kids & Family", "2015");
@@ -151,7 +201,7 @@ public class PostFeedViewFragment extends Fragment{
         postsList.add(posts);
 
         posts = new Posts("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        postsList.add(posts);
+        postsList.add(posts);*/
 
         //pAdapter.notifyDataSetChanged();
     }
