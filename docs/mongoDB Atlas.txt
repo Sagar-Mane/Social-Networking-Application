@@ -1,0 +1,5 @@
+URI Connection String
+
+mongodb://sjsuconnectadmin:<PASSWORD>@sjsu-connect-shard-00-00-qbrqn.mongodb.net:27017,sjsu-connect-shard-00-01-qbrqn.mongodb.net:27017,sjsu-connect-shard-00-02-qbrqn.mongodb.net:27017/<DATABASE>?ssl=true&replicaSet=sjsu-connect-shard-0&authSource=admin
+
+Don't forget to add password and database in the string before connecting.
