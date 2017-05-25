@@ -94,6 +94,21 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
             @Override
             public void onClick(View v) {
                 int temp = position;
+
+                JSONObject AFriend = new JSONObject();
+                try {
+
+                    AFriend.put("email",UserIdSingleton.getInstance().getUserId().toString());
+                    AFriend.put("friend_email",friendsList.get(position).getEmail().toString());
+                    AFriend.put("first_name", friendsList.get(position).getFirst_name().toString());
+
+                    FriendRequestsViewFragment.declineFriend(AFriend);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 

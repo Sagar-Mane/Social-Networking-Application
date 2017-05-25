@@ -212,4 +212,29 @@ public class FriendRequestsViewFragment extends Fragment{
         bananatechnologies.sjsuconnect.RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
     }
 
+    public static void declineFriend(JSONObject aFriend) {
+
+        JSONObject posts_response_body = new JSONObject();
+        Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
+        String url ="http://52.88.12.164:3000/rejectFriendRequests";
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.POST, url, aFriend, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.i("Posts Feeds", String.valueOf(response));
+
+                        //mTxtDisplay.setText("Response: " + response.toString());
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
+    }
 }
