@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                  * Error toast.
                  *//*
                 Context context = getApplicationContext();
-                CharSequence text = "Oops ! Something went wrong. Try Again";
+                CharSequence text =  "Oops ! Something went wrong. Try Again";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -152,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     if(response.get("statusCode").toString().equals("200")){
                         Log.i(TAG,"LogIn succesful");
+
+                        UserIdSingleton.getInstance().setFirst_name(response.get("first_name").toString());
+                        UserIdSingleton.getInstance().setLast_name(response.get("last_name").toString());
                         //After receiving reponse from Login API start main screen
                         startMainScreen();
                     }

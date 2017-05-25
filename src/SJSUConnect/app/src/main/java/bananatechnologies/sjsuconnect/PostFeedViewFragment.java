@@ -16,10 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -46,7 +50,8 @@ public class PostFeedViewFragment extends Fragment{
     private List<Posts> postsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PostAdapter pAdapter;
-    private Button newPost;
+    public EditText status ;
+    public Button newPost;
 
     public static PostFeedViewFragment newInstance(int page, String title) {
 
@@ -64,7 +69,7 @@ public class PostFeedViewFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
+        String email = UserIdSingleton.getInstance().getUserId();
 
         View Root = inflater.inflate(R.layout.postfeedviewfragment,container,false);
 
@@ -75,7 +80,9 @@ public class PostFeedViewFragment extends Fragment{
 
         Log.i("PostFeed", String.valueOf(postsList.size()));
         pAdapter.notifyDataSetChanged();
+        status=(EditText)Root.findViewById(R.id.editText);
 
+        newPost = (Button) Root.findViewById(R.id.newPostButton);
 
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Root.getContext());
@@ -83,7 +90,59 @@ public class PostFeedViewFragment extends Fragment{
         recyclerView.addItemDecoration(new DividerItemDecoration(Root.getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        newPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject register_request_body = new JSONObject();
+                String url ="http://52.88.12.164:3000/updateStatus";
+                try
+                {
+                    register_request_body.put("status",status.getText().toString());
+                    register_request_body.put("email",UserIdSingleton.getInstance().getUserId());
+                    register_request_body.put("first_name",UserIdSingleton.getInstance().getFirst_name());
+                    register_request_body.put("last_name",UserIdSingleton.getInstance().getLast_name());
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, register_request_body, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
 
+                        try {
+                            if(response.get("statusCode").toString().equals("200")){
+                                Context context = getContext();
+                                CharSequence text = "Status Updated";
+                                int duration = Toast.LENGTH_LONG;
+                                Toast toast = Toast.makeText(context, text, duration);
+                                toast.show();
+                                status.setText("");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            if(response.get("statusCode").toString().equals("401")){
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //TODO: handle success
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        //TODO: handle failure
+                    }
+                });
+
+                bananatechnologies.sjsuconnect.RequestQueue.getInstance(getContext()).addToRequestQueue(jsonRequest);
+            }
+        });
 
         recyclerView.setAdapter(pAdapter);
 
@@ -119,6 +178,47 @@ public class PostFeedViewFragment extends Fragment{
 
     private void prepareMovieData() {
 
+        JSONObject posts_response_body = new JSONObject();
+        Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
+        String url ="http://52.88.12.164:3000/getTimeline?email="+UserIdSingleton.getInstance().getUserId();
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        postsList = new ArrayList<>();
+                        Log.i("Posts Feeds", String.valueOf(response));
+                        try {
+                            JSONArray data = response.getJSONArray("data");
+
+                            for(int i=0;i<data.length(); i++){
+                                JSONObject jsonas = data.getJSONObject(i);
+                                Posts posts = new Posts(jsonas.getString("status"), jsonas.getString("last_name")+", " + jsonas.getString("first_name"), "05/25/2017");
+                                postsList.add(posts);
+                            }
+                        }
+                        catch (Exception e){
+
+                        }
+
+                        //mTxtDisplay.setText("Response: " + response.toString());
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(getContext()).addToRequestQueue(jsObjRequest);
+
+
+        /*Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
+
+>>>>>>> origin/master
 
         Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
         postsList.add(posts);
@@ -166,7 +266,7 @@ public class PostFeedViewFragment extends Fragment{
         postsList.add(posts);
 
         posts = new Posts("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        postsList.add(posts);
+        postsList.add(posts);*/
 
         //pAdapter.notifyDataSetChanged();
     }

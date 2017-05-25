@@ -2,7 +2,8 @@
  * Created by vedant on 5/15/17.
  */
 var mongo = require('./mongo');
-var url = "mongodb://user1:user1@ds143231.mlab.com:43231/sjsu-connect";
+//var url = "mongodb://user1:user1@ds143231.mlab.com:43231/sjsu-connect";
+var url = "mongodb://sjsuconnectadmin:sagar123@sjsu-connect-shard-00-00-qbrqn.mongodb.net:27017,sjsu-connect-shard-00-01-qbrqn.mongodb.net:27017,sjsu-connect-shard-00-02-qbrqn.mongodb.net:27017/sjsu-connect-primary?ssl=true&replicaSet=sjsu-connect-shard-0&authSource=admin";
 
 //Updating status
 exports.updateStatus = function(req, res) {
@@ -10,6 +11,8 @@ exports.updateStatus = function(req, res) {
 
     var email = req.param("email");
     var status = req.param("status");
+    var first_name = req.param("first_name");
+    var last_name = req.param("last_name");
     var date = Date.now();
 
     mongo.connect(url, function() {
@@ -25,6 +28,8 @@ exports.updateStatus = function(req, res) {
         Status.insert({
             "email": email,
             "status": status,
+            "first_name":first_name,
+            "last_name":last_name,
             "date":new Date(),
         }, function(err, status) {
             if(status){
@@ -65,7 +70,7 @@ exports.getTimeline = function(req, res) {
                 });
 
                 params.push(email);
-                if(friends.length>0){
+                if(params.length>0){
                     var Status = mongo.collection('Status');
                     Status.find({"email": {$in: params}}).sort( { "date": -1 } ).toArray(function(err, posts){
                         if(err)
