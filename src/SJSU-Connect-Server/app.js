@@ -55,8 +55,10 @@ app.get('/getMessages', message.getMessages);
 app.post('/follow',friends.follow);
 app.post('/updateStatus', post.updateStatus);
 app.get('/getTimeline',post.getTimeline);
-app.get('/getPosts',post.getPosts);
+
+app.post('/getPosts',post.getPosts);
 app.get('/getProfile',user.getProfile);
+
 app.post('/resetPassword',user.resetPassword);
 
 http.createServer(app).listen(app.get('port'), function(){
