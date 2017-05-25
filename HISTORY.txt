@@ -1,0 +1,107 @@
+45f3bfb (HEAD -> master, origin/master, origin/HEAD) Decline Friend Requests
+08be27f Merge remote-tracking branch 'origin/master'
+694ab92 ApproveFriends
+df05fc1 Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+b6719f7 update status
+5e36b15 Technology stack final
+578bf62 Technology Stack
+0a69dc0 High level design updated - Final
+a380ae7 Adding architecture diagram for web server
+6cfb0e9 get posts
+5170c51 posts integrated
+545574d posts get request integrated
+cdcee7f Adding web server URLs in register module
+9bf3ab3 Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+23cf000 Fixing get posts api
+391ff85 Correcting high level design
+7e02edc Connecting web server to mongoDB Atlas
+315173a Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+9d3546a Adding button Handlers  on POSTS and FRIENDS
+96ac7af notification tab
+4628937 Friends Page
+c0db56b Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+209fde7 Posts Wall
+eb59d81 Adding High Level Design Diagram
+054f5d6 Schema
+c8be4eb Adding wireframes
+9164183 Adding wireframes
+37556bf reset and forget password apis
+a4b744f Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+cb025bd updated browse friends
+c2d706c Creating API DOC README file for API reference
+f289fe1 Adding Get Timeline API
+e878881 Adding follow others API
+82ba8b4 Adding Add friend by Email API
+2d275ec Adding get friend requests API
+d29a334 Adding forgot password API
+0e154a1 Transferring API Description file from Apiary.io
+aaced61 Transferring API Description file from Apiary.io
+dd3a810 Transferring API Description file from Apiary.io
+cb1caa3 Registration Verification and Login flow completed (Error handling done)
+64916e7 merge
+1ff5617 get profile
+3be2e99 Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+ee7dd35 Uploading to S3
+801c4fc Updating response and error handlers in register user API call
+e822b54 Adding JSON Volley request for Register User API call
+a3c4178 updating the JSONObject
+588193c json object to send
+f178f40 Create readme.md
+c943246 Adding postman collection with APIs to test server
+574f112 JSONObjectRequest
+111aaa9 Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+b85bdf3 Demos
+cbe88ac Demo Folder
+2e73143 corrected date format in /updatestatus and added getposts
+59ba19e Adding update status api
+dbe1260 Adding login API call. Register Verify Login flow completed
+8e795e0 /follow
+4f39be6 /getMessages
+0492cb5 sendmessage api
+72c247f approve friend
+5b853e5 Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+c938cc6 reject friend request
+9df1c0c updated the login method
+72207b1 Adding singleton pattern for storing session
+a39fd17 browseFriends app.js call
+e7cdcb6 browseFriends Module
+a555fa9 Adding GET and POST ping resources to test from android
+f8fb3b9 Adding API call to register new user
+83f2b92 Adding logic to verify new user
+e307e26 Adding logic to handle register new user
+2c5e1b5 Login Model
+83e0a88 Adding API for rejecting friend requests.
+3969c41 Adding API for approving friend requests
+ec9fd3e Adding API for sending and receiving messages
+9d4cf0d Adding project handout
+48341f0 Adding update status API
+fd574e4 Adding browse friends API
+4e1e2b9 26 add by email
+b435772 24 and 25 addFriend and getPendingRequests
+49b5311 16 validate user api
+17e21ce 18 Update Profile Api
+80c1d99 Register user
+5902199 Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+4597081 Adding verify user activity and improving register user UI
+94ddf32 MongoDB connections
+aec474e Adding activity for register new user
+0cfe217 Updating directory structure
+e7a2eb2 Adding update profile API blueprint
+b80ce01 Database schema mockup V1.0
+59cf9f4 Adding Get Posts API blueprint
+63b5bde Adding Validate Newly Registered user API
+23d30dc Updating Register User API
+cd1fd78 Adding login API doc
+120135e Updating register API link "testing'
+72e1709 Updating Apiary host link
+ffee304 Transferring API Description file from Apiary.io
+93c29bd Adding UI for register user activity
+e79c619 Testing post request to the server with Volley
+5b085a9 Adding RequestQueue class which uses singleton pattern to use single instace of Request Queue
+8bcf4ec Testing Ping Api with Volley
+bd61caa Setting up Node Express server for SJSU connect
+20e754d Adding Main Screen UI with swipe tabs & loading main screen after login
+a96b2b1 Starting the login module
+93bdab2 Setting up project structure and designing UI for log in Screen
+b0c76c6 Update README.md
+f9d0e38 Initial commit
