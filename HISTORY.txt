@@ -1,0 +1,617 @@
+commit 684ba191e433549aa15e5b4546c9cbc4b0d98e0c
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 25 16:14:23 2017 -0700
+
+    Adding commit history log txt file
+
+commit 45f3bfbeb6a83361b268c4f1ea0eb0bd8409f059
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 15:23:53 2017 -0700
+
+    Decline Friend Requests
+
+commit 08be27fe9118a3687a619306cc342ef3af8f06f9
+Merge: 694ab92 df05fc1
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 15:17:26 2017 -0700
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    
+    #       src/SJSUConnect/app/src/main/java/bananatechnologies/sjsuconnect/PostFeedViewFragment.java
+
+commit 694ab920a5b97f82ca43b0407d060c2fb64725cf
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 15:09:53 2017 -0700
+
+    ApproveFriends
+
+commit df05fc19aa285b0e77eae5b5201de46e8b531c07
+Merge: b6719f7 5e36b15
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Thu May 25 14:05:57 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit b6719f737a9951aa7f93213ed8bc272f9b216b6a
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Thu May 25 14:05:40 2017 -0700
+
+    update status
+
+commit 5e36b155cd85bcda3fee52d6622f6633d7807604
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Thu May 25 13:23:29 2017 -0700
+
+    Technology stack final
+
+commit 578bf629df483ec43316d2e068fd79cd80b91f03
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Thu May 25 13:19:34 2017 -0700
+
+    Technology Stack
+
+commit 0a69dc0a518a0027851e570e08981970037dacc7
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Thu May 25 12:45:14 2017 -0700
+
+    High level design updated - Final
+
+commit a380ae7e1807cf76dd575a5cc43d795ad79391fc
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 25 12:41:01 2017 -0700
+
+    Adding architecture diagram for web server
+
+commit 6cfb0e93c364534ca352da1aebc4b31587757b57
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Thu May 25 12:03:06 2017 -0700
+
+    get posts
+
+commit 5170c515a17ac57c9f27cbb7c8b54733aec7243f
+Merge: 545574d cdcee7f
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Thu May 25 11:24:39 2017 -0700
+
+    posts integrated
+
+commit 545574df86a5b03b3718ad230e883492dbded7da
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Thu May 25 11:14:24 2017 -0700
+
+    posts get request integrated
+
+commit cdcee7f83946d31bf6410d4bb38d4c72f836cf8a
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 25 11:11:37 2017 -0700
+
+    Adding web server URLs in register module
+
+commit 9bf3ab324292ed3acf9322f6a1aeb6ce6add0640
+Merge: 23cf000 391ff85
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 25 10:37:51 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit 23cf00024fe6d7d556bce0bd534d7fa4b90bcf00
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 25 10:37:26 2017 -0700
+
+    Fixing get posts api
+
+commit 391ff857d330d0d4112f6e38ed209f348d21a991
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Thu May 25 09:24:27 2017 -0700
+
+    Correcting high level design
+
+commit 7e02edcd81e2b3558311b7a2f1bcba5e94a3a950
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 25 07:10:06 2017 -0700
+
+    Connecting web server to mongoDB Atlas
+
+commit 315173adefef332d4133cfcb2a14240b362c433c
+Merge: 9d3546a 96ac7af
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 02:35:41 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit 9d3546a9fac5ebee870afc2d98b96cf61dca6c37
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 02:35:31 2017 -0700
+
+    Adding button Handlers  on POSTS and FRIENDS
+
+commit 96ac7afcd4ffa5e4e755e973120e9d4eaffbbe9c
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Thu May 25 02:33:40 2017 -0700
+
+    notification tab
+
+commit 4628937ba3236f694c5679c9a0ced298f074f09b
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 02:20:59 2017 -0700
+
+    Friends Page
+
+commit c0db56b430f04c51f363b0f653f3bb5d2ee76152
+Merge: 209fde7 eb59d81
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 01:42:50 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit 209fde7e54a3d8abb5691a74e24639f7a78e2a3b
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Thu May 25 01:42:27 2017 -0700
+
+    Posts Wall
+
+commit eb59d819aed3404f969dfd54e18659435527564f
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Thu May 25 00:50:36 2017 -0700
+
+    Adding High Level Design Diagram
+
+commit 054f5d686cd3a198a64e6a6f1d2dd2a6950461df
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Wed May 24 23:56:38 2017 -0700
+
+    Schema
+
+commit c8be4eb8e3f701ad89713a6c359e4bdf353c42df
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 23:55:09 2017 -0700
+
+    Adding wireframes
+
+commit 91641833a9f52ac57bd44eebdbc210cc430fdee1
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 23:52:40 2017 -0700
+
+    Adding wireframes
+
+commit 37556bfe5e47cc7c6e9c074632088dc9177e6481
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Wed May 24 23:23:36 2017 -0700
+
+    reset and forget password apis
+
+commit a4b744f7e73feee52839beed739c5c7ed7a2b901
+Merge: cb025bd c2d706c
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Wed May 24 20:46:40 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit cb025bd6e56942b85bd33577fa42eff42ef8158c
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Wed May 24 20:46:32 2017 -0700
+
+    updated browse friends
+
+commit c2d706cb37ebb8d70ff013bf9a8fba1ee188f74b
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 20:17:10 2017 -0700
+
+    Creating API DOC README file for API reference
+
+commit f289fe19e136fb83f11915a0fdf568ea93d5e9ee
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 20:15:11 2017 -0700
+
+    Adding Get Timeline API
+
+commit e8788816e24a4b0cbee8b4d35b35eb202263b239
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 20:11:05 2017 -0700
+
+    Adding follow others API
+
+commit 82ba8b464d6c70596ad97244b43924b174a5a7c8
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 20:08:54 2017 -0700
+
+    Adding Add friend by Email API
+
+commit 2d275ec1368b0862d9cd3607f4cd1310314d6b56
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 20:04:49 2017 -0700
+
+    Adding get friend requests API
+
+commit d29a3347f1dae3864f27cd735aca89aa1c293fb2
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 19:56:56 2017 -0700
+
+    Adding forgot password API
+
+commit 0e154a13c53e5d38a57ac480c934182648dbed22
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 19:52:53 2017 -0700
+
+    Transferring API Description file from Apiary.io
+
+commit aaced6176cadeea84a06234cc55895b7e9a456e6
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 19:50:20 2017 -0700
+
+    Transferring API Description file from Apiary.io
+
+commit dd3a810aa837ece038db00da5ae0c387e338262d
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 19:50:14 2017 -0700
+
+    Transferring API Description file from Apiary.io
+
+commit cb1caa3d3800212c08cb22b20a6d19d838f48a78
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 19:18:41 2017 -0700
+
+    Registration Verification and Login flow completed (Error handling done)
+
+commit 64916e786680f4f14c225edcc944233df7f07f64
+Merge: 1ff5617 3be2e99
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Wed May 24 18:07:11 2017 -0700
+
+    merge
+
+commit 1ff561746560f7b86b3d1fa9307d0df9aac773a1
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Wed May 24 18:05:09 2017 -0700
+
+    get profile
+
+commit 3be2e9962f9300c3bc5cca847ccb1e347fa9bab8
+Merge: ee7dd35 801c4fc
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Wed May 24 15:38:06 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit ee7dd353e8e794e289443cb6fddd4259c344cc65
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Wed May 24 15:37:56 2017 -0700
+
+    Uploading to S3
+
+commit 801c4fc45083b66b25d3ee8e70f8d0a8a997af40
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 12:55:18 2017 -0700
+
+    Updating response and error handlers in register user API call
+
+commit e822b54f4cf33352fe9c9f70895eed52610cbd0a
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 12:22:32 2017 -0700
+
+    Adding JSON Volley request for Register User API call
+
+commit a3c41786495cbcc279002b35119f9ab9a1bbfcb6
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Wed May 24 12:08:40 2017 -0700
+
+    updating the JSONObject
+
+commit 588193cf82f2ac9844fdf5dd801ad0e83bbb1906
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Wed May 24 10:51:05 2017 -0700
+
+    json object to send
+
+commit f178f40654dc30b2c2dca3c0850a48fdeb01a999
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Wed May 24 10:32:41 2017 -0700
+
+    Create readme.md
+
+commit c94324664ed3edcf1ce3929b21c5271239225070
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Wed May 24 09:52:34 2017 -0700
+
+    Adding postman collection with APIs to test server
+
+commit 574f1127445465584b9ba502ba5747aac3d0d0b9
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Sun May 21 13:29:59 2017 -0700
+
+    JSONObjectRequest
+
+commit 111aaa91f72d2e6751c36b086b4be2284edc0e5f
+Merge: b85bdf3 cbe88ac
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Sun May 21 13:08:34 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit b85bdf3902e4bcd803fa3130614d39dea139f674
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Sun May 21 13:08:01 2017 -0700
+
+    Demos
+
+commit cbe88acf558f02b1f5e1a0895262e008a52376c9
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Sun May 21 12:48:53 2017 -0700
+
+    Demo Folder
+
+commit 2e73143e41297acee3edeb70bf98f994532e88a4
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Tue May 16 18:03:09 2017 -0700
+
+    corrected date format in /updatestatus and added getposts
+
+commit 59ba19eec7d001a3e818ab80f520fb476b2e9221
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Mon May 15 21:29:33 2017 -0700
+
+    Adding update status api
+
+commit dbe126020711e41d3ad878c1849d7fdda6217711
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 18:15:59 2017 -0700
+
+    Adding login API call. Register Verify Login flow completed
+
+commit 8e795e0f9a7b921b52f99e72c25ada5bb36e16b5
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Mon May 15 17:40:52 2017 -0700
+
+    /follow
+
+commit 4f39be6bc29eac6cbec3ac947f322dae18f4b59a
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Mon May 15 16:58:17 2017 -0700
+
+    /getMessages
+
+commit 0492cb5042fc9470861b4d12b4126c20c6cb58b3
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Mon May 15 16:43:10 2017 -0700
+
+    sendmessage api
+
+commit 72c247fc0756afc1e2136c9eb570946bc0edf2e3
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Mon May 15 16:27:26 2017 -0700
+
+    approve friend
+
+commit 5b853e57afff6506b8fda4be255d9506cd5c64cc
+Merge: c938cc6 9df1c0c
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Mon May 15 15:39:48 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit c938cc663ebc2313d867c5e9ac14edac5ecbc710
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Mon May 15 15:39:43 2017 -0700
+
+    reject friend request
+
+commit 9df1c0cac873ad714b5470880812ffe945e31ea5
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Mon May 15 15:32:57 2017 -0700
+
+    updated the login method
+
+commit 72207b1222fc7269707684414bd714cc100837e5
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 14:14:05 2017 -0700
+
+    Adding singleton pattern for storing session
+
+commit a39fd170591043f8dd2225a4bdd3092ee1a8a12b
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Mon May 15 14:11:05 2017 -0700
+
+    browseFriends app.js call
+
+commit e7cdcb61e0ce84f65b4508517138d91618e9eeaf
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Mon May 15 14:10:23 2017 -0700
+
+    browseFriends Module
+
+commit a555fa9e26de62621363b425ca688ae2b6896a82
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 12:41:12 2017 -0700
+
+    Adding GET and POST ping resources to test from android
+
+commit f8fb3b9663b7c5e3903049d53d7bc9dc2844809c
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 12:36:45 2017 -0700
+
+    Adding API call to register new user
+
+commit 83f2b92a16f87c3492f27345fc216d5431596c4f
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 11:56:18 2017 -0700
+
+    Adding logic to verify new user
+
+commit e307e266bbeb5398880e088a031ac04c2d2e9dc1
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 11:46:36 2017 -0700
+
+    Adding logic to handle register new user
+
+commit 2c5e1b5fe61faca6ef75276a5b1f413340bcb92c
+Author: Jay Nirgudkar <jnirgudkar1@gmail.com>
+Date:   Mon May 15 11:00:23 2017 -0700
+
+    Login Model
+
+commit 83e0a88fde75b2a7c0a46098dea510ad52548453
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 09:46:57 2017 -0700
+
+    Adding API for rejecting friend requests.
+
+commit 3969c413210e0da389256a5304ff83eb38ada8fb
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 09:43:48 2017 -0700
+
+    Adding API for approving friend requests
+
+commit ec9fd3e0ec64e50915a765d3a5013487bddcd8eb
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 09:40:16 2017 -0700
+
+    Adding API for sending and receiving messages
+
+commit 9d4cf0d7e95947ad28e250ae96bfb117ef44cd83
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Mon May 15 09:30:43 2017 -0700
+
+    Adding project handout
+
+commit 48341f03b7e888db0e296f5e51b4c2a91792812f
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Sun May 14 18:44:18 2017 -0700
+
+    Adding update status API
+
+commit fd574e4d6a91547e9bae56fd7d44fd8e178341f1
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Sun May 14 18:40:34 2017 -0700
+
+    Adding browse friends API
+
+commit 4e1e2b9597f2c079d36f0286546189bb5c50d8d1
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Sun May 14 15:05:24 2017 -0700
+
+    26 add by email
+
+commit b435772345815e3cb816e2561668e2728ff5d7f5
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Sun May 14 14:21:01 2017 -0700
+
+    24 and 25 addFriend and getPendingRequests
+
+commit 49b531188627c23b2fbf4cc5608cb1dc785b573a
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Sun May 14 13:35:45 2017 -0700
+
+    16 validate user api
+
+commit 17e21ce5011e85a244681be33253144668a8c585
+Author: jpranjal <jpranjal1304@gmail.com>
+Date:   Sun May 14 12:59:49 2017 -0700
+
+    18 Update Profile Api
+
+commit 80c1d9968361c285d4a2b07bffde3b2985c38f08
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Fri May 12 16:39:11 2017 -0700
+
+    Register user
+    
+    Added user to mongo db.
+
+commit 59021994393a31517468553c3e48933b44b92932
+Merge: 4597081 94ddf32
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 16:28:33 2017 -0700
+
+    Merge branch 'master' of https://github.com/Sagar-Mane/Social-Networking-Application
+
+commit 45970819ba78ef280851ff9f3dce03d7387d1402
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 16:28:07 2017 -0700
+
+    Adding verify user activity and improving register user UI
+
+commit 94ddf328be51aa88fad2e39cf76205e4a85ec1fa
+Author: jnirgudkar1 <jnirgudkar1@gmail.com>
+Date:   Fri May 12 16:12:30 2017 -0700
+
+    MongoDB connections
+
+commit aec474e0c3b8d1631eb432d73c728f8e3d785987
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 15:54:24 2017 -0700
+
+    Adding activity for register new user
+
+commit 0cfe2172683e53f0ebd61d12ecb61109dab01627
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 11:31:23 2017 -0700
+
+    Updating directory structure
+
+commit e7a2eb20304cea53e177477606b5aa6ef4563031
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 11:27:51 2017 -0700
+
+    Adding update profile API blueprint
+
+commit b80ce01e6cec0090c7374306a21c0b0c3edd291e
+Author: Vedant Shete <vedantshete93@gmail.com>
+Date:   Fri May 12 11:01:50 2017 -0700
+
+    Database schema mockup V1.0
+
+commit 59cf9f4d39d85ca55d9996274b0f502b2474f05e
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 10:28:12 2017 -0700
+
+    Adding Get Posts API blueprint
+
+commit 63b5bde41b97a47f1975108ddfd6c7435f731d75
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 01:23:38 2017 -0700
+
+    Adding Validate Newly Registered user API
+
+commit 23d30dcd321998281b3c30af22c4d5d599ca4fb2
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Fri May 12 01:11:31 2017 -0700
+
+    Updating Register User API
+
+commit cd1fd78cb8f14f7d1b802033ad199d9424e11f12
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 11 22:39:05 2017 -0700
+
+    Adding login API doc
+
+commit 120135e396655ba887d81e09501816f4f54cc043
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 11 22:25:42 2017 -0700
+
+    Updating register API link "testing'
+
+commit 72e1709e4bdd21df2085b3e5f50f6da56c1d97bc
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 11 22:21:51 2017 -0700
+
+    Updating Apiary host link
+
+commit ffee30498aee443f4a9d497a6a7cad74bdb5ae42
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 11 22:20:42 2017 -0700
+
+    Transferring API Description file from Apiary.io
+
+commit 93c29bd2d9c756f5ace1a457c99b7fca54378713
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 11 21:16:28 2017 -0700
+
+    Adding UI for register user activity
+
+commit e79c619450e79ef5866e7a945ddf7045862f94fd
+Author: Sagar Mane <sagar.mane006@gmail.com>
+Date:   Thu May 11 19:03:36 2017 -0700
+
+    Testing post request to the server with Volley

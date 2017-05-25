@@ -13,8 +13,8 @@ import com.astuetz.PagerSlidingTabStrip;
  */
 
 public class PagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
-    private static int NUM_ITEMS = 4;
-    private int tabIcons[] = {R.mipmap.post,R.mipmap.fr, R.mipmap.profile, R.mipmap.notifications};
+    private static int NUM_ITEMS = 5;
+    private int tabIcons[] = {R.mipmap.post,R.mipmap.fr, R.mipmap.profile, R.mipmap.notifications,R.mipmap.fr};
 
     public PagerAdapter(FragmentManager fm) {
         super(fm);
@@ -31,6 +31,8 @@ public class PagerAdapter extends FragmentPagerAdapter implements PagerSlidingTa
                 return ProfileViewFragment.newInstance(2, "Profile");
             case 3: // Fragment # 0 - This will show FirstFragment different title
                 return NotificationsViewFragment.newInstance(3, "Notifications");
+            case 4: // Fragment # 0 - This will show FirstFragment different title
+                return FriendsViewFragment.newInstance(4, "Friends");
 
             default:
                 return null;
