@@ -121,7 +121,7 @@ public class PostFeedViewFragment extends Fragment{
 
         JSONObject posts_response_body = new JSONObject();
         Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
-        String url ="http://10.0.0.89:3000/getPosts?email="+UserIdSingleton.getInstance().getUserId();
+        String url ="http://10.0.0.89:3000/getTimeline?email="+UserIdSingleton.getInstance().getUserId();
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -142,6 +142,7 @@ public class PostFeedViewFragment extends Fragment{
 
                         }
 
+                        //mTxtDisplay.setText("Response: " + response.toString());
                     }
                 }, new Response.ErrorListener() {
 
@@ -156,6 +157,9 @@ public class PostFeedViewFragment extends Fragment{
 
 
         /*Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
+
+
+        Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
         postsList.add(posts);
 
         posts = new Posts("Inside Out", "Animation, Kids & Family", "2015");

@@ -22,7 +22,8 @@ import java.util.List;
  */
 
 public class FriendRequestsViewFragment extends Fragment{
-
+    /*private String title;
+    private int page;*/
     private static final String TAG = "PostFeedViewFragment";
     private String title;
     private int page;

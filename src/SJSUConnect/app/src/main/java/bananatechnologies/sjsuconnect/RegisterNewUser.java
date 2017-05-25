@@ -113,7 +113,7 @@ public class RegisterNewUser extends AppCompatActivity {
                 //testing json object request
 
                 JSONObject register_request_body = new JSONObject();
-                String url ="http://192.168.99.1:3000/register";
+                String url ="http://52.26.244.28:3000/register";
                 try
                 {
                     register_request_body.put("first_name",first_name.getText().toString());
