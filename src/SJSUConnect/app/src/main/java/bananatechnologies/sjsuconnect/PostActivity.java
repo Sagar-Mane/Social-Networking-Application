@@ -1,107 +1,88 @@
 package bananatechnologies.sjsuconnect;
 
-
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sagar Mane on 11-05-2017.
- * Don't change or modify before asking it contains dependencies.
+ * Created by jnirg on 5/24/2017.
  */
 
-public class PostFeedViewFragment extends Fragment{
+public class PostActivity extends Activity {
 
-    private static final String TAG = "PostFeedViewFragment";
-    private String title;
-    private int page;
+   // private List<Movie> movieList = new ArrayList<>();
     private List<Posts> postsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PostAdapter pAdapter;
     private Button newPost;
 
-    public static PostFeedViewFragment newInstance(int page, String title) {
 
-        PostFeedViewFragment fragmentFirst = new PostFeedViewFragment();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        //fragmentFirst.setArguments(args);
-
-        return fragmentFirst;
-    }
-
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);*/
+        //setSupportActionBar(toolbar);
 
-
-
-        View Root = inflater.inflate(R.layout.postfeedviewfragment,container,false);
-
-        recyclerView = (RecyclerView) Root.findViewById(R.id.recycler_view);
-
-        prepareMovieData();
-        pAdapter = new PostAdapter(postsList);
-
-        Log.i("PostFeed", String.valueOf(postsList.size()));
-        pAdapter.notifyDataSetChanged();
-
-
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Root.getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(Root.getContext(), LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-
-        recyclerView.setAdapter(pAdapter);
-
-
-
-        return Root;
-
-    }
-
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        Log.i(TAG, "OnAttach");
-
-        Activity activity = (Activity) context;
-        recyclerView = (RecyclerView) activity.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         pAdapter = new PostAdapter(postsList);
 
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(pAdapter);
 
-        prepareMovieData();
+        /*this.newPost = (Button) findViewById(R.id.n ewPostButton);
 
-    }
+
+        newPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"New POST!!!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
 */
 
+       /* recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                //Movie movie = movieList.get(position);
+                Posts posts = postsList.get(position);
+                //Toast.makeText(getApplicationContext(), posts.getFirst_name() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));*/
+
+        prepareMovieData();
+    }
 
     private void prepareMovieData() {
 
@@ -153,13 +134,7 @@ public class PostFeedViewFragment extends Fragment{
         posts = new Posts("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
         postsList.add(posts);
 
-        //pAdapter.notifyDataSetChanged();
+        pAdapter.notifyDataSetChanged();
     }
 
-    /*@Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        return rootview;
-    }*/
 }
