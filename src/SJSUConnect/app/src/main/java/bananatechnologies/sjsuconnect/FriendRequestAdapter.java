@@ -24,9 +24,11 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
             title = (TextView) view.findViewById(R.id.title);
             genre = (TextView) view.findViewById(R.id.genre);
             year = (TextView) view.findViewById(R.id.year);
+
+            accept = (Button) view.findViewById(R.id.accept);
+            decline = (Button) view.findViewById(R.id.decline);
         }
     }
-
 
     public FriendRequestAdapter(List<Friends> friendList) {
         this.friendsList = friendList;
@@ -48,6 +50,23 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         holder.title.setText(friends.getFirst_name());
         holder.genre.setText(friends.getPost());
         holder.year.setText(friends.getPicture());
+
+
+        holder.accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        holder.decline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     public int getItemCount() {

@@ -17,13 +17,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, year, genre;
-        public Button accept,decline;
+        public Button updatePost;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             genre = (TextView) view.findViewById(R.id.genre);
             year = (TextView) view.findViewById(R.id.year);
+
+            updatePost = (Button) view.findViewById(R.id.newPostButton);
         }
     }
 
@@ -48,6 +50,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         holder.title.setText(posts.getFirst_name());
         holder.genre.setText(posts.getPost());
         holder.year.setText(posts.getPicture());
+
+
+        holder.updatePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
     public int getItemCount() {
