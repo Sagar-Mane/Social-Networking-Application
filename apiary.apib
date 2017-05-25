@@ -304,3 +304,22 @@ This API will be used to approve friend requests.
                 "status":"Friend request deleted."
             }
         ]
+
+## Get Friend Requests [/getFriendRequests]
+This API will be used for reponding to friend requests.
+
+### Repond to friend requests. [GET]
+
++ Request (application/json)
+
+        {
+            "email":"sagar.mane@gmail.com"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "response":"Array of pending friend requests"
+            }
+        ]
