@@ -4,6 +4,8 @@ var ObjectId = require('mongodb').ObjectID;
 var url = "mongodb://user1:user1@ds143231.mlab.com:43231/sjsu-connect";
 var bcrypt = require('bcrypt-nodejs');
 var nodemailer = require('nodemailer');
+var AWS = require('aws-sdk');
+var fs = require('fs');
 
 
 
@@ -61,6 +63,14 @@ exports.register=function(req,res){
     var email = req.param("email");
     var password = req.param("password");
     var crp = bcrypt.hashSync(password);
+
+
+    console.log("FIRSTNAME:- "+first_name);
+    console.log("LASTNAME:- "+last_name);
+    console.log("COUNTRY:- "+country_code);
+    console.log("PHONE:- "+phone_number);
+    console.log("EMAIL:- "+email);
+    console.log("PASSWORD:- "+password);
 
     // create reusable transporter object using the default SMTP transport
     var transporter = nodemailer.createTransport({
@@ -168,16 +178,22 @@ exports.editProfile=function(req,res){
             "interests":interests}
         }, function(err, user){
 
-            var json_responses;
-            if(err){
-                json_responses = {"statusCode" : 401};
-                res.send(json_responses);
-            }
-            else
-            {
-                json_responses = {"statusCode" : 200};
-                res.send(json_responses);
-            }
+
+            UpdatePhoto(email, "wonderland", function(err, result)  {
+                if (err) {
+
+                    console.log("Update did not succeed");
+                    json_responses = {"statusCode" : 401};
+                    res.send(json_responses);
+
+                } else if (result){
+
+                    console.log("Update successful");
+                    json_responses = {"statusCode" : 200};
+                    res.send(json_responses);
+
+                }
+            });
         });
     });
 };
@@ -242,3 +258,46 @@ exports.getProfile=function(req,res){
     });
 
 };
+exports.ping = function(req,res)
+{
+    console.log("CONNECTED TO PING PING")
+    var temp = req.param("ping");
+    console.log("+++++++++++++++++++++++++++++++++++++++++"+temp+"++++++++++++++++++++++++++++++++++++++++++++++++++++")
+}
+
+
+
+function UpdatePhoto(username, password, callback)
+{
+    var info = {user: username, pwd: password};
+    AWS.config.loadFromPath('./tsconfig.json');
+
+    AWS.config = new AWS.Config();
+    AWS.config.accessKeyId = "AKIAJR43AOEDFYFWX4FQ";
+    AWS.config.secretAccessKey = "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";
+    AWS.config.region = "us-west-1";
+    AWS.config.apiVersions = {
+        "s3": "2006-03-01"
+    }
+
+    var s3 = new AWS.S3();
+
+    var bodystream = fs.createReadStream('C:\\Users\\jnirg\\Desktop\\PAUL\\test.png');
+
+    var params = {
+        'Bucket': 'facebookandroid277project',
+        'Key': username+ '/images/' + 'profile.png',
+        'Body': bodystream,
+        'ContentEncoding': 'base64',
+        Metadata: {
+            'Content-Type': 'image/jpeg'
+        }
+
+    };
+
+    //also tried with s3.putObject
+    s3.upload(params, function(err, data){
+        console.log('after s3 upload====', err, data);
+        callback(err,data);
+    })
+}
