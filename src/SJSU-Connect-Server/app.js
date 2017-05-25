@@ -56,6 +56,7 @@ app.post('/follow',friends.follow);
 app.post('/updateStatus', post.updateStatus);
 app.get('/getTimeline',post.getTimeline);
 app.get('/getPosts',post.getPosts);
+app.get('/getProfile',user.getProfile);
 
 
 http.createServer(app).listen(app.get('port'), function(){

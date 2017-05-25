@@ -215,3 +215,30 @@ exports.validate=function(req,res){
         });
     });
 };
+
+
+exports.getProfile=function(req,res){
+    console.log("Reporting from getProfile function");
+
+    var email = req.param("email");
+
+    mongo.connect(url, function() {
+
+        console.log('CONNECTED TO MONGO IN getProfile');
+        var Users = mongo.collection('Users');
+
+        Users.findOne({
+            "email": email
+        }, function(err, user){
+            if(user != null){
+                response={"statusCode" : 200, "data":user};
+                res.send(response);
+              }
+            else{
+                response = {"statusCode": 401,"message":"user does not exist"};
+                res.send(response);
+            }
+        });
+    });
+
+};
