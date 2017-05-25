@@ -14,14 +14,14 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/accept"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxWidth="5sp"
         android:minHeight="2dp"
-        android:text="Accept"
+        android:text="Decline"
         android:layout_below="@+id/genre"
-        android:layout_toLeftOf="@+id/decline"
+        android:layout_toLeftOf="@+id/button"
         android:onClick="Delete"/>
 
 
@@ -53,12 +53,12 @@
 
 
     <Button
-        android:id="@+id/decline"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxWidth="4sp"
         android:minHeight="2dp"
-        android:text="Decline"
+        android:text="Accept"
         android:layout_below="@+id/genre"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
