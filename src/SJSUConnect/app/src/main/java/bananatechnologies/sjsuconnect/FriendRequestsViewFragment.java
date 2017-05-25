@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Sagar Mane on 11-05-2017.
@@ -42,8 +45,9 @@ public class FriendRequestsViewFragment extends Fragment{
     private List<Friends> friendsRequestList = new ArrayList<>();
     private RecyclerView recyclerView;
     private FriendRequestAdapter fAdapter;
-    private Button accept,decline;
+    private Button accept,decline, sendRequest;
     public static Context c;
+    public TextView editText;
 
     public static FriendRequestsViewFragment newInstance(int page, String title) {
 
@@ -74,8 +78,32 @@ public class FriendRequestsViewFragment extends Fragment{
         c = getContext();
         View temp = inflater.inflate(R.layout.frequest_list_row,container,false);
 
-        accept = (Button) temp.findViewById(R.id.accept);
-        decline = (Button) temp.findViewById(R.id.decline);
+        editText = (EditText) root.findViewById(R.id.addFriendText);
+
+        sendRequest = (Button) root.findViewById(R.id.sendAddRequest);
+
+
+        sendRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject posts_response_body = new JSONObject();
+                try
+                {
+                    posts_response_body.put("enail",UserIdSingleton.getInstance().getUserId());
+                    posts_response_body.put("friend_email",editText.getText().toString());
+                    //posts_response_body.put("friend_email",editText.getText().toString());
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
+                //String url ="http://52.88.12.164:3000/addByEmail";
+
+                AddFriendByEmail(posts_response_body);
+
+            }
+        });
 
 
         prepareFriendRequestData();
@@ -92,6 +120,29 @@ public class FriendRequestsViewFragment extends Fragment{
         return root;
     }
 
+    private void AddFriendByEmail(JSONObject posts_response_body) {
+
+        String url ="http://52.88.12.164:3000/addByEmail";
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.POST, url, posts_response_body, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.i("Posts Feeds", String.valueOf(response));
+
+                        //mTxtDisplay.setText("Response: " + response.toString());
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
+    }
 
 
     private void prepareFriendRequestData() {
