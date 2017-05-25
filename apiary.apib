@@ -344,3 +344,24 @@ This API will be used for adding friend with email addresss.
                 "message":"Successful ! Added to your friend list"
             }
         ]
+
+## Follow others [/follow]
+This API will be used for following other users on SJSU connect.
+
+### Follow [POST]
+
++ Request (application/json)
+
+        {
+            "email":"sagar.mane@gmail.com",
+            "follow_user_email":"vedant@example.com",
+            "first_name" : "Vedant"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "message":"Successful ! Following user"
+            }
+        ]
