@@ -1,8 +1,8 @@
 var mongo = require('./mongo');
 var ObjectId = require('mongodb').ObjectID;
 //var url = "mongodb://localhost:27017/sjsu-connect";
-var url = "mongodb://user1:user1@ds143231.mlab.com:43231/sjsu-connect";
-
+//var url = "mongodb://user1:user1@ds143231.mlab.com:43231/sjsu-connect";
+var url = "mongodb://sjsuconnectadmin:sagar123@sjsu-connect-shard-00-00-qbrqn.mongodb.net:27017,sjsu-connect-shard-00-01-qbrqn.mongodb.net:27017,sjsu-connect-shard-00-02-qbrqn.mongodb.net:27017/sjsu-connect-primary?ssl=true&replicaSet=sjsu-connect-shard-0&authSource=admin";
 exports.sendMessage=function(req,res){
     console.log("Reporting from sendMessage ");
 

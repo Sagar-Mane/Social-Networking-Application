@@ -37,11 +37,9 @@ exports.login=function(req,res){
 
                 if(bcrypt.compareSync(password, result[0].password) && result[0].active_ind == true)
                 {
-                    //db.close();
-                    //req.session.username = msg.username;
                     res.code = "401";
                     res.value = "Succes Login";
-                    res.send({statusCode: "200"});
+                    res.send({statusCode: "200", first_name:result[0].first_name, last_name:result[0].last_name});
                 }
                 else
                 {

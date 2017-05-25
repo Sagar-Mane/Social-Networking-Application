@@ -121,7 +121,7 @@ public class PostFeedViewFragment extends Fragment{
 
         JSONObject posts_response_body = new JSONObject();
         Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
-        String url ="http://10.0.0.89:3000/getTimeline?email="+UserIdSingleton.getInstance().getUserId();
+        String url ="http://52.26.244.28:3000/getTimeline?email="+UserIdSingleton.getInstance().getUserId();
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -134,7 +134,7 @@ public class PostFeedViewFragment extends Fragment{
                             JSONArray data = response.getJSONArray("data");
                             for(int i=0;i<data.length(); i++){
                                 JSONObject jsonas = data.getJSONObject(i);
-                                Posts posts = new Posts(jsonas.getString("status"), "Action & Adventure", "05/25/2017");
+                                Posts posts = new Posts(jsonas.getString("status"), jsonas.getString("last_name")+", " + jsonas.getString("first_name"), "05/25/2017");
                                 postsList.add(posts);
                             }
                         }
