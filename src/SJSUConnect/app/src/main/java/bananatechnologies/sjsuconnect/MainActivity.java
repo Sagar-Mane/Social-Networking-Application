@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         //testing json object request
 
         JSONObject register_request_body = new JSONObject();
-        String url ="http://52.26.244.28:3000/login";
+        String url ="http://52.88.12.164:3000/login";
         try
         {
             register_request_body.put("email",email.getText().toString());
