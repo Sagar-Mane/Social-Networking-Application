@@ -323,3 +323,24 @@ This API will be used for reponding to friend requests.
                 "response":"Array of pending friend requests"
             }
         ]
+
+## Add friend by Email Address [/addByEmail]
+This API will be used for adding friend with email addresss.
+
+### Add By EMail [POST]
+
++ Request (application/json)
+
+        {
+            "email":"sagar.mane@gmail.com",
+            "friend_email":"vedant@example.com",
+            "first_name" : "Vedant"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "message":"Successful ! Added to your friend list"
+            }
+        ]
