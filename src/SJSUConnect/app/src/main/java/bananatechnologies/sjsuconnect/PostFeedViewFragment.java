@@ -2,6 +2,7 @@ package bananatechnologies.sjsuconnect;
 
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -216,6 +218,7 @@ public class PostFeedViewFragment extends Fragment{
 
         /*Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
 
+>>>>>>> origin/master
 
         Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
         postsList.add(posts);
