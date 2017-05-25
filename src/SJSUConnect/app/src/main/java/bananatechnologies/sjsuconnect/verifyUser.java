@@ -12,10 +12,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +37,8 @@ public class verifyUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_user);
         Log.i(TAG,"Reporting from verify user activity on create");
+
+
 
         //getting activity reference.
         verify_user_activity=this;
@@ -57,54 +64,74 @@ public class verifyUser extends AppCompatActivity {
         Log.i(TAG,"Verfication code="+verification_code.getText().toString());
 
         //Call verify user API
-        //final String email=UserIdSingleton.getInstance().getUserId();
+        final String email=UserIdSingleton.getInstance().getUserId();
+        Log.i(TAG,"Email============="+email);
         //Log.i(TAG,"User email test="+email);
         // Get a RequestQueue
-        com.android.volley.RequestQueue queue = bananatechnologies.sjsuconnect.RequestQueue.getInstance(verify_user_activity.getApplicationContext()).
-                getRequestQueue();
-        // Instantiate the RequestQueue.
-        final String email=UserIdSingleton.getInstance().getUserId();
+        //testing json object request
+
+        JSONObject register_request_body = new JSONObject();
         String url ="http://192.168.99.1:3000/validate";
+        try
+        {
+            //POST Request parameters for validate API
+            register_request_body.put("email",email);
+            Log.i(TAG,"Email============="+email);
+            register_request_body.put("verification_id",verification_code.getText().toString());
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, register_request_body, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Response received Success 200
-                        Log.i(TAG,"Response Received Successfully");
-                        Log.i(TAG,"Response="+response);
+                try {
+                    if(response.get("statusCode").toString().equals("200")){
+                        Log.i(TAG,"Verification succesful");
 
-
+                        //After receiving reponse from Validate API start login activity i.e. main activity
                         Context context = getApplicationContext();
-                        CharSequence text = "Registration Succesful Login to Continue !";
+                        CharSequence text = "Verification Successful!";
                         int duration = Toast.LENGTH_LONG;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-
-                        //After receiving reponse from Validate API start login activity i.e. main activity
                         startLoginScreen();
                     }
-                }, new Response.ErrorListener() {
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if(response.get("statusCode").toString().equals("401")){
+                        Log.i(TAG,"Wrong verfication id");
+                        // We may start login activity if this happens...
+                        Context context = getApplicationContext();
+                        CharSequence text = "Error ! Wrong Verification ID";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //TODO: handle success
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Error Occured StatusCode 401
-                Log.i(TAG,"Error occured in the request");
-                Log.i(TAG,"Error=   "+error);
+                error.printStackTrace();
+                //TODO: handle failure
             }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<String, String>();
+        });
 
-                //POST Request parameters for validate API
-                params.put("email",email);
-                params.put("verification_id",verification_code.getText().toString());
-                return params;
-            }
-        };
-        // Add the request to the RequestQueue.
-        bananatechnologies.sjsuconnect.RequestQueue.getInstance(verify_user_activity).addToRequestQueue(stringRequest);
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                2,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(verify_user_activity).addToRequestQueue(jsonRequest);
     }
 
     /**

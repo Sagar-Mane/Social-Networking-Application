@@ -108,7 +108,7 @@ public class RegisterNewUser extends AppCompatActivity {
                 email_address_register=(EditText) findViewById(R.id.email_id_register);
                 password=(EditText) findViewById(R.id.password);
                 Log.i(TAG,"Checking password input"+password.getText().toString());
-
+                UserIdSingleton.getInstance().setUserId(email_address_register.getText().toString());
 
                 //testing json object request
 

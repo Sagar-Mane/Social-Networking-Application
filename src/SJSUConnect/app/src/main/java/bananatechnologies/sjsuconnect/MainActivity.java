@@ -13,12 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 getRequestQueue();
         // Instantiate the RequestQueue.
 
-        String url ="http://192.168.99.1:3000/login";
+        /*String url ="http://192.168.99.1:3000/login";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -105,9 +110,9 @@ public class MainActivity extends AppCompatActivity {
                 //Error Occured StatusCode 401
                 Log.i(TAG,"Error occured in the request");
                 Log.i(TAG,"Error=   "+error);
-                /**
+                *//**
                  * Error toast.
-                 */
+                 *//*
                 Context context = getApplicationContext();
                 CharSequence text = "Oops ! Something went wrong. Try Again";
                 int duration = Toast.LENGTH_SHORT;
@@ -126,7 +131,63 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         // Add the request to the RequestQueue.
-        bananatechnologies.sjsuconnect.RequestQueue.getInstance(login_activity).addToRequestQueue(stringRequest);
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(login_activity).addToRequestQueue(stringRequest);*/
+        //testing json object request
+
+        JSONObject register_request_body = new JSONObject();
+        String url ="http://192.168.99.1:3000/login";
+        try
+        {
+            register_request_body.put("email",email.getText().toString());
+            register_request_body.put("password",password.getText().toString());
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, register_request_body, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if(response.get("statusCode").toString().equals("200")){
+                        Log.i(TAG,"LogIn succesful");
+                        //After receiving reponse from Login API start main screen
+                        startMainScreen();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if(response.get("statusCode").toString().equals("401")){
+                        Log.i(TAG,"Login Error Occurred");
+                        // We may start login activity if this happens...
+                        Context context = getApplicationContext();
+                        CharSequence text = "Oops ! Something went wrong. Try Again";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //TODO: handle success
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                //TODO: handle failure
+            }
+        });
+
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                2,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        bananatechnologies.sjsuconnect.RequestQueue.getInstance(this).addToRequestQueue(jsonRequest);
     }
 
     /**
