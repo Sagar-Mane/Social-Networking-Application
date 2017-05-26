@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -89,8 +90,10 @@ public class FriendRequestsViewFragment extends Fragment{
                 JSONObject posts_response_body = new JSONObject();
                 try
                 {
-                    posts_response_body.put("enail",UserIdSingleton.getInstance().getUserId());
+                    posts_response_body.put("email",UserIdSingleton.getInstance().getUserId());
                     posts_response_body.put("friend_email",editText.getText().toString());
+                    posts_response_body.put("first_name",UserIdSingleton.getInstance().getFirst_name());
+
                     //posts_response_body.put("friend_email",editText.getText().toString());
                 }
                 catch (JSONException e)
@@ -129,6 +132,12 @@ public class FriendRequestsViewFragment extends Fragment{
                     public void onResponse(JSONObject response) {
 
                         Log.i("Posts Feeds", String.valueOf(response));
+                        Context context = getContext();
+                        CharSequence text = "Status Updated";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        
 
                         //mTxtDisplay.setText("Response: " + response.toString());
                     }
@@ -157,7 +166,7 @@ public class FriendRequestsViewFragment extends Fragment{
 
                     @Override
                     public void onResponse(JSONObject response) {
-
+                        friendsRequestList = new ArrayList<>();
                         Log.i("Posts Feeds", String.valueOf(response));
                         try {
                             JSONArray data = response.getJSONArray("data");
