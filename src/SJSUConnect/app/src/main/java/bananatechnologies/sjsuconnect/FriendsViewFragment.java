@@ -87,23 +87,17 @@ public class FriendsViewFragment extends Fragment{
     /*@Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         Log.i(TAG, "OnAttach");
-
         Activity activity = (Activity) context;
         recyclerView = (RecyclerView) activity.findViewById(R.id.recycler_view);
-
         pAdapter = new PostAdapter(postsList);
-
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(pAdapter);
-
         prepareMovieData();
-
     }
 */
 
@@ -112,7 +106,7 @@ public class FriendsViewFragment extends Fragment{
 
         JSONObject posts_response_body = new JSONObject();
         Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
-        String url ="http://52.88.12.164:3000/browseFriends?email="+UserIdSingleton.getInstance().getUserId();
+        String url ="http://10.0.0.89:3000/browseFriends?email="+UserIdSingleton.getInstance().getUserId();
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -149,53 +143,36 @@ public class FriendsViewFragment extends Fragment{
 
 
         /*Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
-
-
         Posts posts = new Posts("Mad Max: Fury Road", "Action & Adventure", "2015");
         postsList.add(posts);
-
         posts = new Posts("Inside Out", "Animation, Kids & Family", "2015");
         postsList.add(posts);
-
         posts = new Posts("Star Wars: Episode VII - The Force Awakens", "Action", "2015");
         postsList.add(posts);
-
         posts = new Posts("Shaun the Sheep", "Animation", "2015");
         postsList.add(posts);
-
         posts = new Posts("The Martian", "Science Fiction & Fantasy", "2015");
         postsList.add(posts);
-
         posts = new Posts("Mission: Impossible Rogue Nation", "Action", "2015");
         postsList.add(posts);
-
         posts = new Posts("Up", "Animation", "2009");
         postsList.add(posts);
-
         posts = new Posts("Star Trek", "Science Fiction", "2009");
         postsList.add(posts);
-
         posts = new Posts("The LEGO Movie", "Animation", "2014");
         postsList.add(posts);
-
         posts = new Posts("Iron Man", "Action & Adventure", "2008");
         postsList.add(posts);
-
         posts = new Posts("Aliens", "Science Fiction", "1986");
         postsList.add(posts);
-
         posts = new Posts("Chicken Run", "Animation", "2000");
         postsList.add(posts);
-
         posts = new Posts("Back to the Future", "Science Fiction", "1985");
         postsList.add(posts);
-
         posts = new Posts("Raiders of the Lost Ark", "Action & Adventure", "1981");
         postsList.add(posts);
-
         posts = new Posts("Goldfinger", "Action & Adventure", "1965");
         postsList.add(posts);
-
         posts = new Posts("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
         postsList.add(posts);*/
 
@@ -205,7 +182,6 @@ public class FriendsViewFragment extends Fragment{
     /*@Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         return rootview;
     }*/
 }

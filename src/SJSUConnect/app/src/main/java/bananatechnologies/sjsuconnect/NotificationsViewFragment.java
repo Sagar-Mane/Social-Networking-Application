@@ -73,53 +73,21 @@ public class NotificationsViewFragment extends Fragment {
 
     private void prepareMovieData() {
 
-        Posts posts = new Posts("Notification1", "Action & Adventure", "2015");
+        Posts posts = new Posts("Arpit has posted something", "New Post", "Arpit");
         notificationsList.add(posts);
 
-        posts = new Posts("Inside Out", "Animation, Kids & Family", "2015");
+        posts = new Posts("Deepak has posted something", "New Post", "Deepak");
         notificationsList.add(posts);
 
-        posts = new Posts("Star Wars: Episode VII - The Force Awakens", "Action", "2015");
+        posts = new Posts("Pranjal has followed you", "Follow", "Pranjal");
         notificationsList.add(posts);
 
-        posts = new Posts("Shaun the Sheep", "Animation", "2015");
+        posts = new Posts("One Pending add request", "Add Request", "Himani");
         notificationsList.add(posts);
 
-        posts = new Posts("The Martian", "Science Fiction & Fantasy", "2015");
+        posts = new Posts("Request Accepted", "Accepted Request", "Tejas");
         notificationsList.add(posts);
 
-        posts = new Posts("Mission: Impossible Rogue Nation", "Action", "2015");
-        notificationsList.add(posts);
-
-        posts = new Posts("Up", "Animation", "2009");
-        notificationsList.add(posts);
-
-        posts = new Posts("Star Trek", "Science Fiction", "2009");
-        notificationsList.add(posts);
-
-        posts = new Posts("The LEGO Movie", "Animation", "2014");
-        notificationsList.add(posts);
-
-        posts = new Posts("Iron Man", "Action & Adventure", "2008");
-        notificationsList.add(posts);
-
-        posts = new Posts("Aliens", "Science Fiction", "1986");
-        notificationsList.add(posts);
-
-        posts = new Posts("Chicken Run", "Animation", "2000");
-        notificationsList.add(posts);
-
-        posts = new Posts("Back to the Future", "Science Fiction", "1985");
-        notificationsList.add(posts);
-
-        posts = new Posts("Raiders of the Lost Ark", "Action & Adventure", "1981");
-        notificationsList.add(posts);
-
-        posts = new Posts("Goldfinger", "Action & Adventure", "1965");
-        notificationsList.add(posts);
-
-        posts = new Posts("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        notificationsList.add(posts);
 
         //pAdapter.notifyDataSetChanged();
     }

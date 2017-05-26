@@ -1,7 +1,6 @@
 package bananatechnologies.sjsuconnect;
 
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,14 +28,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Sagar Mane on 11-05-2017.
  * Don't change or modify before asking it contains dependencies.
  */
 
-public class FriendRequestsViewFragment extends Fragment{
+public class UsersViewFragment extends Fragment{
     /*private String title;
     private int page;*/
     private static final String TAG = "PostFeedViewFragment";
@@ -45,14 +42,13 @@ public class FriendRequestsViewFragment extends Fragment{
     private int page;
     private List<Friends> friendsRequestList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private FriendRequestAdapter fAdapter;
-    private Button accept,decline, sendRequest;
+    private UsersAdapter uAdapter;
     public static Context c;
     public TextView editText;
 
-    public static FriendRequestsViewFragment newInstance(int page, String title) {
+    public static UsersViewFragment newInstance(int page, String title) {
 
-        FriendRequestsViewFragment fragmentFirst = new FriendRequestsViewFragment();
+        UsersViewFragment fragmentFirst = new UsersViewFragment();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
         args.putString("someTitle", title);
@@ -73,72 +69,38 @@ public class FriendRequestsViewFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.friend_requests_view_fragment,container,false);
+        View root = inflater.inflate(R.layout.usersviewfragment,container,false);
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view_friend_request);
+        recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view_users);
         c = getContext();
-        View temp = inflater.inflate(R.layout.frequest_list_row,container,false);
-
-        editText = (EditText) root.findViewById(R.id.addFriendText);
-
-        sendRequest = (Button) root.findViewById(R.id.sendAddRequest);
-
-
-        sendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JSONObject posts_response_body = new JSONObject();
-                try
-                {
-                    posts_response_body.put("email",UserIdSingleton.getInstance().getUserId());
-                    posts_response_body.put("friend_email",editText.getText().toString());
-                    posts_response_body.put("first_name",UserIdSingleton.getInstance().getFirst_name());
-
-                    //posts_response_body.put("friend_email",editText.getText().toString());
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-                Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
-                //String url ="http://52.88.12.164:3000/addByEmail";
-
-                AddFriendByEmail(posts_response_body);
-
-            }
-        });
-
+        View temp = inflater.inflate(R.layout.users_list_row,container,false);
 
         prepareFriendRequestData();
-        fAdapter = new FriendRequestAdapter(friendsRequestList);
+        uAdapter = new UsersAdapter(friendsRequestList);
 
         Log.i("PostFeed", String.valueOf(friendsRequestList.size()));
-        fAdapter.notifyDataSetChanged();
+        uAdapter.notifyDataSetChanged();
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(root.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(root.getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(fAdapter);
+        recyclerView.setAdapter(uAdapter);
         return root;
     }
 
-    private void AddFriendByEmail(JSONObject posts_response_body) {
+    private void addFriend(JSONObject posts_response_body) {
 
-        String url ="http://52.88.12.164:3000/addByEmail";
+        String url ="http://10.0.0.89:3000/addByEmail";
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.POST, url, posts_response_body, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
-                        Log.i("Posts Feeds", String.valueOf(response));
                         Context context = getContext();
-                        CharSequence text = "Success! Request Sent";
+                        CharSequence text = "Success! Friend Request Sent";
                         int duration = Toast.LENGTH_LONG;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-
-
                         //mTxtDisplay.setText("Response: " + response.toString());
                     }
                 }, new Response.ErrorListener() {
@@ -150,7 +112,7 @@ public class FriendRequestsViewFragment extends Fragment{
                     }
                 });
 
-        bananatechnologies.sjsuconnect.RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
+        RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
     }
 
 
@@ -159,7 +121,7 @@ public class FriendRequestsViewFragment extends Fragment{
 
         JSONObject posts_response_body = new JSONObject();
         Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
-        String url ="http://10.0.0.89:3000/getFriendRequests?email="+UserIdSingleton.getInstance().getUserId();
+        String url ="http://10.0.0.89:3000/getAllUsers?email="+UserIdSingleton.getInstance().getUserId();
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -170,10 +132,11 @@ public class FriendRequestsViewFragment extends Fragment{
                         Log.i("Posts Feeds", String.valueOf(response));
                         try {
                             JSONArray data = response.getJSONArray("data");
+
                             for(int i=0;i<data.length(); i++){
                                 JSONObject jsonas = data.getJSONObject(i);
-                                Friends reqList = new Friends(jsonas.getString("friend_name"), "Can I add you!!!", "05/25/2017",jsonas.getString("email_id"));
-                                friendsRequestList.add(reqList);
+                                Friends posts = new Friends(jsonas.getString("first_name") + " " + jsonas.getString("last_name"), "","",jsonas.getString("email"));
+                                friendsRequestList.add(posts);
                             }
                         }
                         catch (Exception e){
@@ -191,7 +154,7 @@ public class FriendRequestsViewFragment extends Fragment{
                     }
                 });
 
-        bananatechnologies.sjsuconnect.RequestQueue.getInstance(getContext()).addToRequestQueue(jsObjRequest);
+        RequestQueue.getInstance(getContext()).addToRequestQueue(jsObjRequest);
         /*fAdapter.notifyDataSetChanged();*/
 
         /*Friends friends = new Friends("Mad Max: Fury Road", "Action & Adventure", "2015");
@@ -257,8 +220,6 @@ public class FriendRequestsViewFragment extends Fragment{
                     public void onResponse(JSONObject response) {
 
                         Log.i("Posts Feeds", String.valueOf(response));
-
-                        //mTxtDisplay.setText("Response: " + response.toString());
                     }
                 }, new Response.ErrorListener() {
 
@@ -269,20 +230,19 @@ public class FriendRequestsViewFragment extends Fragment{
                     }
                 });
 
-        bananatechnologies.sjsuconnect.RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
+        RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
     }
 
-    public static void declineFriend(JSONObject aFriend) {
-
+    public static void follow(JSONObject temp)
+    {
         JSONObject posts_response_body = new JSONObject();
         Log.i("user id", String.valueOf(UserIdSingleton.getInstance().getUserId()));
-        String url ="http://10.0.0.89:3000/rejectFriendRequests";
+        String url ="http://10.0.0.89:3000/follow";
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.POST, url, aFriend, new Response.Listener<JSONObject>() {
+                (Request.Method.POST, url, temp, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        Log.i("Posts Feeds", String.valueOf(response));
 
                         //mTxtDisplay.setText("Response: " + response.toString());
                     }
@@ -295,6 +255,8 @@ public class FriendRequestsViewFragment extends Fragment{
                     }
                 });
 
-        bananatechnologies.sjsuconnect.RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
+        RequestQueue.getInstance(c).addToRequestQueue(jsObjRequest);
     }
+
+
 }

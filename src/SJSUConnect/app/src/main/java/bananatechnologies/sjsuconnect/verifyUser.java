@@ -71,7 +71,7 @@ public class verifyUser extends AppCompatActivity {
         //testing json object request
 
         JSONObject register_request_body = new JSONObject();
-        String url ="http://52.26.244.28:3000/validate";
+        String url ="http://10.0.0.89:3000/validate";
         try
         {
             //POST Request parameters for validate API
