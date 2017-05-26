@@ -343,38 +343,58 @@ exports.forgotPassword=function(req,res){
 };
 
 
-exports.resetPassword=function(req,res){
-    console.log("Reporting from validate function");
+exports.getAllUsers=function(req,res){
+    console.log("Reporting from getAllUsers function");
     var email = req.param("email");
-    var verification_id = parseInt(req.param("verification_id"));
-    var newPassword = req.param("password");
-    var crp = bcrypt.hashSync(newPassword);
 
     mongo.connect(url, function(){
         console.log('Connected too mongo at: ' + url );
         var Users = mongo.collection('Users');
-        Users.findOne({
-            "email": email, "verification_id": verification_id
-        }, function(err, user) {
-            if (user != null) {
-                Users.update({"email": email},
-                    {$set: {"password": crp}},
-                    function (err, user) {
-                        var json_responses;
-                        if (user.result.nModified == 1) {
-                            json_responses = {"statusCode": 200};
-                            res.send(json_responses);
+        var Friends = mongo.collection('Friends');
+        Friends.find({$and: [{"friend_status":"add"}, {$or: [{"email_id":email},{"friend_email_id":email}]}]}).toArray(function(err, friends){
+            if(err)
+            {
+                response={"statusCode" : 501};
+                res.send(response);
+            }
+
+            else
+            {
+                var params =[];
+                friends.forEach(function callback(currentValue, index, array) {
+                    if(currentValue.friend_email_id == email) {
+                        params.push(currentValue.email_id);
+                        console.log(currentValue.email_id);
+                    }
+                    else if(currentValue.email_id == email) {
+                        params.push(currentValue.friend_email_id);
+                        console.log(currentValue.friend_email_id);
+                    }
+                });
+
+                params.push(email);
+                if(params.length>=0){
+                    var Status = mongo.collection('Status');
+                    Users.find({"email": {$nin: params}}).sort( { "date": -1 } ).toArray(function(err, posts){
+                        if(err)
+                        {
+                            response={"statusCode" : 501};
+                            res.send(response);
                         }
-                        else {
-                            json_responses = {"statusCode": 500};
-                            res.send(json_responses);
+
+                        else
+                        {
+                            response={"statusCode" : 200, "data":posts};
+                            res.send(response);
                         }
                     });
-            }
-            else {
-                json_responses = {"statusCode": 401, "message": "Invalid authentication code"};
-                res.send(json_responses);
+                }
+                else {
+                    response={"statusCode" : 200, "posts":[]};
+                    res.send(response);
+                }
             }
         });
+
     });
 };

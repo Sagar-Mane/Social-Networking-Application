@@ -118,3 +118,54 @@ exports.getPosts = function(req, res) {
         });
     });
 };
+
+exports.getTimeline = function(req, res) {
+    console.log("Inside getTimeline function");
+
+    var email = req.param("email");
+
+    mongo.connect(url, function() {
+
+        var Friends = mongo.collection('Friends');
+        var json_response = {};
+        Friends.find({"email_id":email}, { friend_email_id: 1,_id: 0}).toArray(function(err, friends){
+            if(err)
+            {
+                response={"statusCode" : 501};
+                res.send(response);
+            }
+
+            else
+            {
+                var params =[];
+                friends.forEach(function callback(currentValue, index, array) {
+                    params.push(currentValue.friend_email_id);
+                });
+
+                params.push(email);
+                if(params.length>0){
+                    var Status = mongo.collection('Status');
+                    Status.find({"email": {$in: params}}).sort( { "date": -1 } ).toArray(function(err, posts){
+                        if(err)
+                        {
+                            response={"statusCode" : 501};
+                            res.send(response);
+                        }
+
+                        else
+                        {
+                            response={"statusCode" : 200, "data":posts};
+                            res.send(response);
+                        }
+                    });
+                }
+                else {
+                    response={"statusCode" : 200, "posts":[]};
+                    res.send(response);
+                }
+            }
+        });
+
+    });
+
+};
