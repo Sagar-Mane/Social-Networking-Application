@@ -1,7 +1,7 @@
 # Social-Networking-Application
 ## Description
 ### About
-Android Mobile Application with full fledged social features. App will interact with the server hosted in the cloud. 
+Android Mobile Application with full fledged social features. App will interact with the server (Node Express Server) hosted on AWS. 
 ### Features
 * Sign Up
   * Sign Up with Email
